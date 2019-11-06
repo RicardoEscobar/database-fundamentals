@@ -9,7 +9,7 @@
   </docTitle>
   <navMap>
 
-    <navPoint id="navpoint-toc" playOrder="1"><navLabel><text>Content</text></navLabel><content src="html/toc.html#toc"/></navPoint>
+    <navPoint id="navpoint-toc" playOrder="1"><navLabel><text>Table of contents</text></navLabel><content src="html/toc.html#toc"/></navPoint>
 
     <navPoint id="navpoint-introduction" playOrder="2"><navLabel><text>Introduction</text></navLabel><content src="html/introduction.html"/></navPoint>
 
