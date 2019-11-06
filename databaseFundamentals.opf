@@ -20,6 +20,7 @@
 
 	</manifest>
 	<spine toc="ncx">
+		<itemref idref="content"/>
 		<itemref idref="introduction"/>
 		<itemref idref="database-fundamentals"/>
 	</spine>
