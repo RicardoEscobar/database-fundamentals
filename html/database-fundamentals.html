@@ -12,9 +12,25 @@
 
     <h1>Database fundamentals</h1>
 
-    <p class="null_text_indent"><span class="dropcaps1">D</span>ropcaps and intro paragraph.</p>
+    <p class="null_text_indent"><span class="dropcaps1">A</span> database is build from tables. A database without tables is useless, not only there is no data, but there is no place to put data in. This is a <span class="key">tutorial</span> chapter, which means that you'll touch a lot of subjects on the surface and not deep enough, to avoid confusion, just assume that this is more like a guided tour of the basics, I don't expect that you understand everything on this chapter, but I hope to give you a wide view of what the job asks from you. And for you to see what the database business is about.</p>
+
+    <p>I'm using <span class="key">MariaDB</span> as the database engine, some of these examples may differ depending on the database engine or the version. The source code on this book should work the same in <span class="key">MySQl</span>, most of the exercises are done in <span class="key">standard SQL</span> which means that you can use the source code as is, in standard SQL database engines.</p>
+
+    <p>The installation of a specific database engine is outside the scope of this book and there are plenty of tutorial and videos on whatever database engine you decide to use. This book is written as a guide for SQL databases and most examples are done using standard SQL in order to allow you to use this knowledge on whatever database engine you use.</p>
+
+    <p>I'm assuming that you already installed a database engine and that you can actually run queries on it.</p>
+
+    <p>Before creating a table and making queries, you need to create an actual database. For this chapter, we are creating a database for a human resources department. Most of the time, you'll receive a document called <span class="key">technical requirements</span> this document may say something like this:</p>
+
+    <center><p class="text_border" style="font-style: italic;">"The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to..."</p></center>
+
+    <p>Alongside this document you get a database design diagram, how convenient.</p>
+
+    <img src="../images/diagram/employee_department.png" alt="diagram showing how an employee entity has a relationship with a department entity">
 
     <h2 id="create-database">Creating a database</h2>
+
+    <p></p>
 
     <h2 id="create-table">Create a table</h2>
 
