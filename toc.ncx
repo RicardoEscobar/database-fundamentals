@@ -11,16 +11,19 @@
 
     <navPoint id="navpoint-toc" playOrder="1"><navLabel><text>Table of contents</text></navLabel><content src="html/toc.html#toc"/></navPoint>
 
-    <navPoint id="navpoint-introduction" playOrder="2"><navLabel><text>Introduction</text></navLabel><content src="html/introduction.html"/></navPoint>
+    <navPoint id="navpoint-introduction" playOrder="2"><navLabel><text>Introduction</text></navLabel><content src="html/introduction.html"/>
+      <navPoint id="navpoint-welcome" playOrder="3"><navLabel><text>Welcome</text></navLabel><content src="html/introduction.html#welcome"/></navPoint>
+      <navPoint id="navpoint-what-you-need-to-know" playOrder="4"><navLabel><text>What you need to know</text></navLabel><content src="html/introduction.html#what-you-need-to-know"/></navPoint>
+    </navPoint>
 
-    <navPoint id="navpoint-database-fundamentals" playOrder="3"><navLabel><text>Database fundamentals</text></navLabel><content src="html/database-fundamentals.html"/>
-      <navPoint id="navpoint-create-database" playOrder="4"><navLabel><text>Creating a database</text></navLabel><content src="html/database-fundamentals.html#create-database"/></navPoint>
-      <navPoint id="navpoint-create-table" playOrder="5"><navLabel><text>Create a table</text></navLabel><content src="html/database-fundamentals.html#create-table"/></navPoint>
-      <navPoint id="navpoint-inserting-data" playOrder="6"><navLabel><text>Inserting data</text></navLabel><content src="html/database-fundamentals.html#inserting-data"/></navPoint>
-      <navPoint id="navpoint-selecting-data" playOrder="7"><navLabel><text>Selecting data</text></navLabel><content src="html/database-fundamentals.html#selecting-data"/></navPoint>
-      <navPoint id="navpoint-updating-data" playOrder="8"><navLabel><text>Updating data</text></navLabel><content src="html/database-fundamentals.html#updating-data"/></navPoint>
-      <navPoint id="navpoint-deleting-data" playOrder="9"><navLabel><text>Deleting data</text></navLabel><content src="html/database-fundamentals.html#deleting-data"/></navPoint>
-      <navPoint id="navpoint-drop-table" playOrder="10"><navLabel><text>Drop a table</text></navLabel><content src="html/database-fundamentals.html#drop-table"/></navPoint>
+    <navPoint id="navpoint-database-fundamentals" playOrder="5"><navLabel><text>Database fundamentals</text></navLabel><content src="html/database-fundamentals.html"/>
+      <navPoint id="navpoint-create-database" playOrder="6"><navLabel><text>Creating a database</text></navLabel><content src="html/database-fundamentals.html#create-database"/></navPoint>
+      <navPoint id="navpoint-create-table" playOrder="7"><navLabel><text>Create a table</text></navLabel><content src="html/database-fundamentals.html#create-table"/></navPoint>
+      <navPoint id="navpoint-inserting-data" playOrder="8"><navLabel><text>Inserting data</text></navLabel><content src="html/database-fundamentals.html#inserting-data"/></navPoint>
+      <navPoint id="navpoint-selecting-data" playOrder="9"><navLabel><text>Selecting data</text></navLabel><content src="html/database-fundamentals.html#selecting-data"/></navPoint>
+      <navPoint id="navpoint-updating-data" playOrder="10"><navLabel><text>Updating data</text></navLabel><content src="html/database-fundamentals.html#updating-data"/></navPoint>
+      <navPoint id="navpoint-deleting-data" playOrder="11"><navLabel><text>Deleting data</text></navLabel><content src="html/database-fundamentals.html#deleting-data"/></navPoint>
+      <navPoint id="navpoint-drop-table" playOrder="12"><navLabel><text>Drop a table</text></navLabel><content src="html/database-fundamentals.html#drop-table"/></navPoint>
     </navPoint>
   </navMap>
 </ncx>
