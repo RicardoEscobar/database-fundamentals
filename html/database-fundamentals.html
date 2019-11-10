@@ -125,6 +125,106 @@
         <li>department</li>
     </ul>
 
+    <p>Fields on a table must be declared of a certain <span class="key">data type</span>, on databases, data types are used to impose rules and restrictions on the data to be stored. Depending of the type of data to be stored, you should chose a field data type.</p>
+
+    <p>For example, for the <span class="key">firstName</span> and <span class="key">lastName</span> fields we may use <span class="key">varchar</span> data type, this is the data type used for text data, for the <span class="key">hireDate</span> we may use a <span class="key">date</span> data type. Notice that in the case of varchar, we may need to define how many characters are we allowed to store on that single field. Here is a list of the data types that we are going to use on this table on MariaDB:</p>
+
+    <ul>
+        <li><b>INTEGER, INT.</b> Saves an integer number, no decimal point.</li>
+        <li><b>VARCHAR,</b> Saves a text field, must declare the maximum amount of characters allowed. Ex. VARCHAR(30)</li>
+        <li><b>DATE,</b> Stores a date data type, useful for saving dates and do date related operations and queries.</li>
+    </ul>
+
+    <p>For a detailed list of the data types supported by MariaDB visit: <a href="https://mariadb.com/kb/en/library/data-types/">Data Types - MariaDB Knowledge Base</a></p>
+
+    <p>If you are using another database engine, please look for your database documentation on the Internet.</p>
+
+    <p>In our case, our employee table would have these fields:</p>
+
+    <ul>
+        <li>firstName, VARCHAR(30)</li>
+        <li>lastName, VARCHAR(30)</li>
+        <li>hireDate, DATE</li>
+    </ul>
+
+    <p>So were does INTEGER come into play? We missed an important field that does not come defined in the technical requirements, that's the concept of the <span class="key">primary key</span>. A primary key, also called a primary keyword, is a key in a relational database that is unique for each record. This value helps identifying a single record as unique on the entire table. In our case, we will create a primary key of type INTEGER. Since this field is artificial, which means that it's not part of the actual data required.</p>
+
+    <p>So we create a field called <span class="key">employeeID</span> this field will store an INTEGER number and it will be auto incremented field, this means that the number it's introduced by the database engine itself in order to avoid duplication and ensure the value it's unique for the entire table.</p>
+
+    <p>So we end up with this list of fields for the employee table:</p>
+
+    <ul>
+        <li>employeeID, INTEGER</li>
+        <li>firstName, VARCHAR(30)</li>
+        <li>lastName, VARCHAR(30)</li>
+        <li>hireDate, DATE</li>
+    </ul>
+
+    <p>To visualize the <span class="key">employee table</span>, we may represent it like a spreadsheet:</p>
+
+    <img  class="mobicontent" src="../images/table/employee_table_01.PNG" width="458" height="258"/>
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Josh</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">1/5/2019</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Adam</td>
+            <td class="table_data">Black</td>
+            <td class="table_data">23/7/2018</td>
+            <td class="table_data">Human resources</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">1/9/2015</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">4</td>
+            <td class="table_data">James</td>
+            <td class="table_data">Stuart</td>
+            <td class="table_data">20/3/2017</td>
+            <td class="table_data">Sales</td>
+        </tr>
+        <tr>
+                <td class="table_data">5</td>
+                <td class="table_data">Jessica</td>
+                <td class="table_data">White</td>
+                <td class="table_data">27/10/2019</td>
+                <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
+    <p>So after all, it's time to actually code the table in SQL. Let's see the command to create the employee table then examine it to understand the details.</p>
+
+    <code>
+        <b>CREATE OR REPLACE TABLE </b>employee (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+        <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+    </code>
+
     <h2 id="inserting-data">Inserting data</h2>
 
     <h2 id="selecting-data">Selecting data</h2>
