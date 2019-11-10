@@ -90,7 +90,40 @@
 
     <h2 id="create-table">Create a table</h2>
 
-    <p>If we recall the requirements</p>
+    <p>If we recall the requirements for this database, we get this:</p>
+
+    <center><p class="text_border" style="font-style: italic;">&quot;The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to...&quot;</p></center>
+
+    <p>With so little information be sure that whatever design you do at this time, it's going to get changed in the future, don't feel mad or frustrated, that's just how it is. But we are going to be working to get to the best version of the database as soon as possible.</p>
+
+    <p>The first thing to identify is the actual requirements to meet. After reading the requirements you can see that the database should be able to store these data:</p>
+
+    <ul>
+        <li>Employee name.</li>
+        <li>Employee hire date.</li>
+        <li>Employee's department.</li>
+    </ul>
+
+    <p>A word that we read here a lot in there it's <span class="key">employee</span>. So It's natural that our table name is just that: &quot;employee&quot;, I name tables in singular not plural and I use the <span class="key">camelCase</span>, naming convention. That means that the first letter of the name is lower case and instead of space, I join all the words and make a separation using a upper case letter, for example: firstName, employeeNorthOffice, employeeSalary, etc.</p>
+
+    <p>Our table's name it's &quot;employee&quot;</p>
+
+    <p>Next we need to add fields to insert our data into, my first proposal would be these fields:</p>
+
+    <ul>
+        <li>name</li>
+        <li>hireDate</li>
+        <li>department</li>
+    </ul>
+
+    <p>Simple. Yet in the case of people's names, it's often required to store them in two fields: <span class="key">first name</span> and <span class="key">last name</span>, this allows you to search employees by last name or first name, also allows you to order these records using last names, quite useful on a lot of circumstances. So the proposed table fields would end like this:</p>
+
+    <ul>
+        <li>firstName</li>
+        <li>lastName</li>
+        <li>hireDate</li>
+        <li>department</li>
+    </ul>
 
     <h2 id="inserting-data">Inserting data</h2>
 
