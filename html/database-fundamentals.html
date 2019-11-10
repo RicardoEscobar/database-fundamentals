@@ -164,7 +164,7 @@
 
     <p>To visualize the <span class="key">employee table</span>, we may represent it like a spreadsheet:</p>
 
-    <img  class="mobicontent" src="../images/table/employee_table_01.PNG" width="458" height="258"/>
+    <img  class="mobicontent" src="../images/table/employee_table_01.PNG" width="1009" height="441"/>
     <table class="defaultcontent table_group">
         <tr>
             <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
@@ -226,6 +226,68 @@
         &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
         <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
     </code>
+
+    <p>Now that's a mouthful. Lets divide and conquer this query by focusing on the first line:</p>
+
+    <code>
+        <b>CREATE OR REPLACE TABLE </b>employee (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+    </code>
+
+    <p>Similar to <b>CREATE OR REPLACE DATABASE</b>, we create the employee table and if it already exists, we replace it with a new version of it.</p>
+
+    <p><b>WARNING: Be careful, this will delete the entire table and all it's data.</b></p>
+
+    <p>Next we create the actual fields of the employee table, the first and more important is the <span class="key">primary key</span> we define it like this:</p>
+
+    <code>
+        <b>CREATE OR REPLACE TABLE </b>employee (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+    </code>
+
+    <p>The second line creates the <b>employeeID</b> field, the <b>INTEGER</b> keyword means that the field it's an integer number, <b>NOT NULL</b> means that this field may never be empty (NULL) when inserting or updating a record, it must always have a valid value, <b>AUTO_INCREMENT</b> means that if there is no value set for the new record or during and update for the record, the database engine will provide a valid auto numeric value to the field. This means that you just don't need to add a value to this field during an insert or update operation, the database engine already knows what to do. We'll see this in action on the next section.</p>
+
+    <code>
+        <b>CREATE OR REPLACE TABLE </b>employee (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+    </code>
+
+    <p>In a similar fashion, we add the fields that are actually required: <b>firstName, lastName, hireDate</b> and <b>department</b>. These fields have their data types defined after their names, remember to follow these field declarations with a coma (,) in order to separate the fields from one another and avoid execution errors.</p>
+
+    <code>
+        <b>CREATE OR REPLACE TABLE </b>employee (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+    </code>
+
+    <p>Finally the last line defines the <b>CONSTRAINT</b> for the primary key. All primary keys are indexed, this means that a space in the database is dedicated to store not just the primary key itself, but the actual record in a index table that allows the database to locate an specific record quickly using the <b>employeeID</b> field as reference. We'll take a deep look at indexes in the future.</p>
+
+    <p>The <b>employee_pk</b> keyword stands for &quot;employee primary key&quot; this is a unique name for this specific index in the entire database.</p>
+
+    <p>The <b>PRIMARY KEY (</b>employeeID<b>));</b> code is used to select which field is to be taken into consideration as the primary key, in this case that's <b>employeeID</b>. This must be considered as part of the primary key, just as the field definition on line two.</p>
+
+    <p>Finally we review the code for creating the <b>employee</b> table.</p>
+
+    <code>
+        <b>CREATE OR REPLACE TABLE </b>employee (<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+        <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+    </code>
+
+    <p>Note that there is no data on the <b>employee</b> table yet, we only created an empty table to be able to store the data into. Next we'll populate our table with actual data.</p>
+
+    <p>This was the hard part, create the database, then create a table. Working with data is 90% of the job, and it's the easiest part of the job. Most database administrators don't spend their time designing and modeling databases, these were created long ago most of the time and you just need to focus on working getting data from the database and presenting information in a meaningful manner.</p>
 
     <h2 id="inserting-data">Inserting data</h2>
 
