@@ -16,7 +16,11 @@
 
     <p>I'm using <span class="key">MariaDB</span> as the database engine, some of these examples may differ depending on the database engine or the version. The source code on this book should work the same in <span class="key">MySQl</span>, most of the exercises are done in <span class="key">standard SQL</span> which means that you can use the source code as is, in standard SQL database engines.</p>
 
-    <p>The installation of a specific database engine is outside the scope of this book and there are plenty of tutorial and videos on whatever database engine you decide to use. This book is written as a guide for SQL databases and most examples are done using standard SQL in order to allow you to use this knowledge on whatever database engine you use.</p>
+    <p>The installation of a specific database engine is outside the scope of this book, however here is a YouTube video that I recorded with installation instructions to install <span class="key">MariaDB</span> on <span class="key"></span>Windows 10. You don't have to open that link on your eReader but you are welcome to try.</p>
+
+    <a href="https://youtu.be/s39ENZ9mLmA">YouTube: How to install MariaDB on Windows 10.</a>
+
+    <p>There are plenty of tutorial and videos on whatever database engine you decide to use. This book is written as a guide for SQL databases and most examples are done using standard SQL in order to allow you to use this knowledge on whatever database engine you use.</p>
 
     <p>I'm assuming that you already installed a database engine and that you can actually run queries on it.</p>
 
@@ -24,13 +28,63 @@
 
     <center><p class="text_border" style="font-style: italic;">"The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to..."</p></center>
 
-    <p>Alongside this document you get a database design diagram, how convenient.</p>
+    <p>During this first chapter you'll learn what most programmers know, regarding database design and modeling. The good news is that after reading this, you are pretty much in line with what most people already know about databases, the bad news is that this knowledge is incomplete and leads to a painful path. Believe it or not, this is what most people work with:</p>
 
-    <img src="../images/diagram/employee_department.png" alt="diagram showing how an employee entity has a relationship with a department entity">
+    <ul>
+        <li>Creating a database.</li>
+        <li>Create a table.</li>
+        <li>Inserting data.</li>
+        <li>Selecting data.</li>
+        <li>Updating data.</li>
+        <li>Deleting data.</li>
+        <li>Drop table.</li>
+    </ul>
 
     <h2 id="create-database">Creating a database</h2>
 
-    <p></p>
+    <p>To create a database you need to run this command on the database engine:</p>
+
+    <center>
+        <code>
+            <b>CREATE DATABASE</b> human_resources;
+        </code>
+    </center>
+
+    <p>You can replace &quot;human_resources&quot; with whatever database name you want. The naming conventions I use are <span class="key">snake_case</span> where all words are lower cased and I use underscore instead of spaces. I don't type &quot;human_resources_database&quot; because it's implied that all databases are just that, databases. So I don't need to write the word database on every database I create.</p>
+
+    <p>If recommend that you save these commands into a text file for easy replication. Text files with SQL queries are called scripts. You can name your scripts with the SQL extension to allow your file system to locate the recommended software to use in order to open these files.</p>
+
+    <p>Example SQL script names:</p>
+
+    <ul>
+        <li>script.sql</li>
+        <li>human_resources_script.sql</li>
+        <li>human_resources.sql</li>
+    </ul>
+
+    <p>Whatever naming conventions you use, just remember to be consistent.</p>
+
+    <p>If you try to execute the same command again, the database engine may tell you that there was an <span class="key">Error: The human_resources database already exists.</span></p>
+
+    <p>While learning, it's common that you'll need to recreate your databases from scratch or create them using a SQL script file. In order to delete (drop) the human_resources database and create it anew, use this command:</p>
+
+    <center>
+        <code>
+            <b>CREATE OR REPLACE DATABASE</b> human_resources;
+        </code>
+    </center>
+
+    <p>The database you just created is empty, there is no data and there is no place to put the data into. In order to put data into a database we need to create tables, inside that database. Before doing anything else, we need to open the database in order to execute more queries (instructions for the database engine to execute).</p>
+
+    <p>To open the &quot;human_resources&quot; database, execute this command:</p>
+
+    <center>
+        <code>
+            <b>USE</b> human_resources;
+        </code>
+    </center>
+
+    <p>Now you can execute queries upon the &quot;human_resources&quot; database. Next we need to create a place to put data into, let's create a table.</p>
 
     <h2 id="create-table">Create a table</h2>
 
