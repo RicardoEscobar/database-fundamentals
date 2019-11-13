@@ -27,6 +27,11 @@
 	src: url(../fonts/hack/Hack-Italic.ttf);
 }
 
+/* Adds indentation to every paragraph, Unless it's class is null_text_indent.*/
+p {
+	text-indent: 4em;
+}
+
 /* Key words in the text are made bold italic */
 .key
 {

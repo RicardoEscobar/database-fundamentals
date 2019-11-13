@@ -28,6 +28,12 @@ ul
 	font-weight:bold;
 }
 
+/* This is used along dropcaps1 and .dropcaps2 classes in order to avoid first line indentation*/
+p.null_text_indent
+{
+	text-indent: 0px;
+}
+
 span.dropcaps1
 {
 	float: left;
