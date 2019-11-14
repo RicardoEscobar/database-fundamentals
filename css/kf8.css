@@ -11,6 +11,7 @@ ul
 .exampleBorder
 {
 	border: .1em groove blue;
+	border-style: dotted;
 	padding: 1%;
 }
 
