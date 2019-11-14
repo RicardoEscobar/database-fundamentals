@@ -26,7 +26,7 @@
 
     <p>Before creating a table and making queries, you need to create an actual database. For this chapter, we are creating a database for a human resources department. Most of the time, you'll receive a document called <span class="key">technical requirements</span> this document may say something like this:</p>
 
-    <center><p class="text_border" style="font-style: italic;">&quot;The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to...&quot;</p></center>
+    <center><p class="text_border null_text_indent" style="font-style: italic;">&quot;The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to...&quot;</p></center>
 
     <p>During this first chapter you'll learn what most programmers know, regarding database design and modeling. The good news is that after reading this, you are pretty much in line with what most people already know about databases, the bad news is that this knowledge is incomplete and leads to a painful path. Believe it or not, this is what most people work with:</p>
 
@@ -44,7 +44,7 @@
 
     <p>To create a database you need to run this command on the database engine:</p>
 
-    <center>
+    <center class="exampleBorder">
         <code>
             <b>CREATE DATABASE</b> human_resources;
         </code>
@@ -68,7 +68,7 @@
 
     <p>While learning, it's common that you'll need to recreate your databases from scratch or create them using a SQL script file. In order to delete (drop) the human_resources database and create it anew, use this command:</p>
 
-    <center>
+    <center class="exampleBorder">
         <code>
             <b>CREATE OR REPLACE DATABASE</b> human_resources;
         </code>
@@ -80,7 +80,7 @@
 
     <p>To open the &quot;human_resources&quot; database, execute this command:</p>
 
-    <center>
+    <center class="exampleBorder">
         <code>
             <b>USE</b> human_resources;
         </code>
@@ -92,7 +92,7 @@
 
     <p>If we recall the requirements for this database, we get this:</p>
 
-    <center><p class="text_border" style="font-style: italic;">&quot;The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to...&quot;</p></center>
+    <center><p class="text_border null_text_indent" style="font-style: italic;">&quot;The company requires to store information about it's employees and departments. We need to store their names, hire dates and the department they belong to...&quot;</p></center>
 
     <p>With so little information be sure that whatever design you do at this time, it's going to get changed in the future, don't feel mad or frustrated, that's just how it is. But we are going to be working to get to the best version of the database as soon as possible.</p>
 
@@ -217,22 +217,26 @@
 
     <p>So after all, it's time to actually code the table in SQL. Let's see the command to create the employee table then examine it to understand the details.</p>
 
-    <code>
-        <b>CREATE OR REPLACE TABLE </b>employee (<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
-        <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
-    </code>
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
 
     <p>Now that's a mouthful. Lets divide and conquer this query by focusing on the first line:</p>
 
-    <code>
-        <b>CREATE OR REPLACE TABLE </b>employee (<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
-    </code>
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        </code>
+    </div>
 
     <p>Similar to <b>CREATE OR REPLACE DATABASE</b>, we create the employee table and if it already exists, we replace it with a new version of it.</p>
 
@@ -240,32 +244,38 @@
 
     <p>Next we create the actual fields of the employee table, the first and more important is the <span class="key">primary key</span> we define it like this:</p>
 
-    <code>
-        <b>CREATE OR REPLACE TABLE </b>employee (<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
-    </code>
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        </code>
+    </div>
 
     <p>The second line creates the <b>employeeID</b> field, the <b>INTEGER</b> keyword means that the field it's an integer number, <b>NOT NULL</b> means that this field may never be empty (NULL) when inserting or updating a record, it must always have a valid value, <b>AUTO_INCREMENT</b> means that if there is no value set for the new record or during and update for the record, the database engine will provide a valid auto numeric value to the field. This means that you just don't need to add a value to this field during an insert or update operation, the database engine already knows what to do. We'll see this in action on the next section.</p>
 
-    <code>
-        <b>CREATE OR REPLACE TABLE </b>employee (<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
-    </code>
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        </code>
+    </div>
 
     <p>In a similar fashion, we add the fields that are actually required: <b>firstName, lastName, hireDate</b> and <b>department</b>. These fields have their data types defined after their names, remember to follow these field declarations with a coma (,) in order to separate the fields from one another and avoid execution errors.</p>
 
-    <code>
-        <b>CREATE OR REPLACE TABLE </b>employee (<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
-        <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
-    </code>
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
 
     <p>Finally the last line defines the <b>CONSTRAINT</b> for the primary key. All primary keys are indexed, this means that a space in the database is dedicated to store not just the primary key itself, but the actual record in a index table that allows the database to locate an specific record quickly using the <b>employeeID</b> field as reference. We'll take a deep look at indexes in the future.</p>
 
@@ -275,15 +285,17 @@
 
     <p>Finally we review the code for creating the <b>employee</b> table.</p>
 
-    <code>
-        <b>CREATE OR REPLACE TABLE </b>employee (<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
-        <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
-    </code>
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
 
     <p>Note that there is no data on the <b>employee</b> table yet, we only created an empty table to be able to store the data into. Next we'll populate our table with actual data.</p>
 
@@ -300,7 +312,7 @@
     <h2 id="deleting-data">Deleting data</h2>
 
     <h2 id="drop-table">Drop a table</h2>
-d
+
 </body>
 
 </html>
