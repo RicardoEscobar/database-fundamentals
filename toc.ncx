@@ -25,5 +25,7 @@
       <navPoint id="navpoint-deleting-data" playOrder="11"><navLabel><text>Deleting data</text></navLabel><content src="html/database-fundamentals.html#deleting-data"/></navPoint>
       <navPoint id="navpoint-drop-table" playOrder="12"><navLabel><text>Drop a table</text></navLabel><content src="html/database-fundamentals.html#drop-table"/></navPoint>
     </navPoint>
+
+    <navPoint id="navpoint-footnotes" playOrder="13"><navLabel><text>Footnotes</text></navLabel><content src="html/footnotes.html"/></navPoint>
   </navMap>
 </ncx>
