@@ -10,8 +10,7 @@ ul
 /* Border to the examples */
 .exampleBorder
 {
-	border: .1em groove blue;
-	border-style: dotted;
+	border: .1em dotted blue;
 	padding: 1%;
 }
 
