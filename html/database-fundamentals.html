@@ -520,9 +520,56 @@
 
     <p>In this example, '2020-01-01' it's used instead of '2019-12-31' because the end date starts at the zero hour of such date. So, if '2019-12-31' is used, the last day of 2019 will not be taken into consideration.</p>
 
-
-
     <h2 id="updating-data">Updating data</h2>
+
+    <p>Now we are entering the danger zone. Inserting new data is not such a big deal compared to updating such data. Many times, the need to change anything will come and the feeling of dread will come along. Modifiyng something that has been there for years may sound like a daunting task, so let me show you the command that creates a lot of painful moments in the life of a database administrator:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <code>
+            <b>UPDATE</b> employee <b>SET</b> firstName = 'Sara';
+        </code>
+    </div>
+
+    <p>At first glance this command just changes somone's first name to 'Sara', but who's name is going to get changed? That's the issue, everyone's first name it's now 'Sara'.</p>
+
+    <img  class="mobicontent" src="../images/table/employee_table_04.PNG" width="1002" height="306"/>
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Sara</td>
+            <td class="table_data">White</td>
+            <td class="table_data">2019-04-01</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Sara</td>
+            <td class="table_data">Jones</td>
+            <td class="table_data">2017-08-13</td>
+            <td class="table_data">NULL</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Sara</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">2019-11-15</td>
+            <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
+    <p>This happens often, that you execute an <span class="key">UPDATE</span> statement without a <span class="key">WHERE</span> clause. So it's important to add a filter just like in the SELECT statement, just that in this case is more important. And there is no CTRL-Z or undo function here, at lest not in standard SQL, so having a filter in this statement is a must most of the time. If you screw up like this, you better have a backup at hand.</p>
 
     <h2 id="deleting-data">Deleting data</h2>
 
