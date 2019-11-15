@@ -339,7 +339,7 @@
 
     <div class="exampleBorder" style="text-align: left;">
         <code>
-            <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Jessica', 'White', '1/9/2015', 'Accounting');
+            <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Jessica', 'White', '2019-04-01', 'Accounting');
         </code>
     </div>
 
@@ -347,13 +347,13 @@
 
     <p>The <b>NULL</b> keyword means that on the first field (employeeID) is not going to insert any value or it's unknown, the database engine will pick the next unused value from the AUTO_INCREMENT property and use that value instead of an actual NULL. Don't insert an actual value there unless you know what you are doing, just let the database engine do it's job.</p>
 
-    <p>Sometimes you don't have all the values or some of the record's values are unknown, in this case we use the NULL keyword in order to tell the database engine that we don't know that value for the record that we want to insert.</p>
+    <p>Sometimes you don't have all the values or some of the record's values are unknown, in this case we use the NULL keyword in order to tell the database engine that we don't know that value for the record.</p>
 
     <p>For example, assume we want to insert another employee, but this time we don't know what department he is going to be working for. So the department field is unknown. In this case we use this command:</p>
 
     <div class="exampleBorder" style="text-align: left;">
             <code>
-                <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Walter', 'Jones', '8/10/2018', NULL);
+                <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Walter', 'Jones', '2017-08-13', NULL);
             </code>
         </div>
 
