@@ -361,11 +361,44 @@
 
     <p><span class="key">DEFAULT</span> values, in the context of databases, are preset values defined for a column type. Default values are used when many records hold similar data.<sup><a id="source-1-2" href="footnotes.html#footnote-1-2" epub:type="noteref">2</a></sup></p>
 
+    <p>When you insert data into a table, the table itself may have a lot of fields or the actual values that you are inserting at a time may be incomplete. In this case, you may choose what fields to insert and ignore the others. To insert a new record on the employee table, use this command:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>INSERT INTO</b> employee<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;(firstName, lastName, department)<br>
+            <b>VALUES</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;('Walter', 'Jones', 'Sales');
+        </code>
+    </div>
+
+    <p>This time you choose to insert a new record with only the name of the employee and it's department name. In tables with a lot of fields, this may come in handy.</p>
+    
+    <p>So what happens with the rest of the fields? in this case they get NULL instead of an actual value. But that's not the behavior that may fit every situation, you may like to set a DEFAULT value for certain fields, for example the hireDate field may have a default value of the current date in the case that none is provided. During the table creation you may set this DEFAULT value with the use of a now() function like this:</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE DEFAULT NOW()</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
+
+    <p>In this version of the employee table, if no hireDate is inserted with the record, the database engine will provide one itself. This DEFAULT value is the result of the function <span class="key">NOW()</span> this function returns the current date and time, in this example, the hireDate field it's a DATE data type, so the NOW() function return a DATE value, this means that the time part it's removed and only the date part is stored in the hireDate field.</p>
+
+    <p>If you already have a table with data that you don't want to delete, I recommend reading the <a href="#alter-table">Alter table</a> section on this chapter, instead of replacing the employee table and start from scratch.</p>
+
     <h2 id="selecting-data">Selecting data</h2>
 
     <h2 id="updating-data">Updating data</h2>
 
     <h2 id="deleting-data">Deleting data</h2>
+
+    <h2 id="alter-table">Alter table</h2>
 
     <h2 id="drop-table">Drop a table</h2>
 
