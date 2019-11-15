@@ -394,6 +394,53 @@
 
     <h2 id="selecting-data">Selecting data</h2>
 
+    <p>Now that you have the means to create a table and inserting records on a table, we now face the issue of listing records or selecting them. We may use this command to select all records from the employee table:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> * <b>FROM</b> employee;
+        </code>
+    </div>
+
+    <p>After executing the <span class="key">SELECT</span> statement, you'll get a list similar to this:</p>
+
+    <img  class="mobicontent" src="../images/table/employee_table_02.PNG" width="1009" height="441"/>
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">2019-04-01</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Walter</td>
+            <td class="table_data">Jones</td>
+            <td class="table_data">2017-08-13</td>
+            <td class="table_data">NULL</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Monica</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">2019-11-15</td>
+            <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
     <h2 id="updating-data">Updating data</h2>
 
     <h2 id="deleting-data">Deleting data</h2>
