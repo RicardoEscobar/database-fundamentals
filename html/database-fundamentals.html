@@ -396,7 +396,7 @@
 
     <p>Now that you have the means to create a table and inserting records on a table, we now face the issue of listing records or selecting them. We may use this command to select all records from the employee table:</p>
 
-    <div class="exampleBorder" style="text-align: left;">
+    <div class="exampleBorder" style="text-align: center;">
         <code>
             <b>SELECT</b> * <b>FROM</b> employee;
         </code>
@@ -404,7 +404,7 @@
 
     <p>After executing the <span class="key">SELECT</span> statement, you'll get a list similar to this:</p>
 
-    <img  class="mobicontent" src="../images/table/employee_table_02.PNG" width="1009" height="441"/>
+    <img  class="mobicontent" src="../images/table/employee_table_02.PNG" width="1004" height="308"/>
     <table class="defaultcontent table_group">
         <tr>
             <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
@@ -440,6 +440,87 @@
             <td class="table_data">Sales</td>
         </tr>
     </table>
+
+    <p>Most of the time a SELECT ALL RECORDS is not the best strategy, specially if you are working with a large dataset, a table with millions of records may prove to be hard to use, so filtering the results is in order. Filtering results can be achieve with the <span class="key">WHERE</span> clause, this clause is used like this:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> employeeID = 1;
+        </code>
+    </div>
+
+    <p>In this example, you are getting all records WHERE the employeeID is equal to '1'. In this case there is only one record:</p>
+
+    <img  class="mobicontent" src="../images/table/employee_table_03.PNG" width="1003" height="174"/>
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">2019-04-01</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+    </table>
+
+    <p>In later chapters we'll get a lot more practical examples. Since selecting data it's the most used SQL statement by far, let's make some more examples.</p>
+
+    <p>If you want to select all employees that belong to the &quot;Sales&quot; department:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> department = 'Sales';
+        </code>
+    </div>
+
+    <p>If you want to select all employees that have not yet being assigned a department:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> department <b>IS NOT NULL</b>;
+        </code>
+    </div>
+
+    <p>If you want to select all employees that their &quot;last name&quot; is equal to &quot;Jones&quot;:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> lastName = 'Jones';
+        </code>
+    </div>
+
+    <p>If you want to select all employees hired between 2018 and 2019 :</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> hireDate <b>BETWEEN</b> '2018-01-01' <b>AND</b> '2020-01-01';
+        </code>
+    </div>
+
+    <p>In this example, '2020-01-01' it's used instead of '2019-12-31' because the end date starts at the zero hour of such date. So, if '2019-12-31' is used, the last day of 2019 will not be taken into consideration.</p>
+
+
 
     <h2 id="updating-data">Updating data</h2>
 
