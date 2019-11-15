@@ -569,7 +569,66 @@
         </tr>
     </table>
 
-    <p>This happens often, that you execute an <span class="key">UPDATE</span> statement without a <span class="key">WHERE</span> clause. So it's important to add a filter just like in the SELECT statement, just that in this case is more important. And there is no CTRL-Z or undo function here, at lest not in standard SQL, so having a filter in this statement is a must most of the time. If you screw up like this, you better have a backup at hand.</p>
+    <p>This happens often, that you execute an <span class="key">UPDATE</span> statement without a <span class="key">WHERE</span> clause. So it's important to add a filter just like in the SELECT statement, just that in this case is more important. And there is no CTRL-Z or undo function here, at least not in standard SQL, so having a filter in this statement is a must most of the time. If you screw up here, you better have a backup at hand.</p>
+
+    <p>The syntax for the UPDATE statement it's pretty straight forward:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> table_name<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;column1 = value1,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;column2 = value2, ...<br>
+            <b>WHERE</b> condition;
+        </code>
+    </div>
+
+    <p>Some common examples include:</p>
+    
+    <p>Update the hire date of Jessica White to today's date:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> employee<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate = <b>NOW()</b><br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID = 1; <i>-- Jessica White's employeeID number</i>
+        </code>
+    </div>
+
+    <p>In this example, you rather use the <i>employeeID</i> number instead of the employee's actual name, if there is more than one Jessica White, both are going to get affected. In most update operations that handle single record updates, the use of the primary key is crucial to select just the desired record.</p>
+
+    <p>Set Walter Jones's department to 'Human resources' and his hire date to today's date:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> employee<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department = 'Human resources',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate = <b>NOW()</b><br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID = 2; <i>-- Walter Jones's employeeID number</i>
+        </code>
+    </div>
+
+    <p>This time, we updated two fields at the same time. We can update more than a single field on every update operation. This is really useful when handling several data updates for a single record.</p>
+
+    <p>Change Monica Smith's name to 'Sara' Smith:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> employee<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName = 'Sara'<br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName = 'Monica'<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>AND</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName = 'Smith';
+        </code>
+    </div>
+
+    <p>I don't recommend to use actual names to look for specific records, so this example is merely academic. On the other hand, you can use an <span class="key">AND</span> keyword to specify two or even more conditions to be meet in order to execute the update statement. In later chapters, you'll get to use more sophisticated queries that use this and other keywords like <span class="key">OR</span> and <span class="key">NOT</span>, in the mean time we are getting started with simple examples.</p>
 
     <h2 id="deleting-data">Deleting data</h2>
 
