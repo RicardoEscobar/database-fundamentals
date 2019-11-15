@@ -307,6 +307,58 @@
     
     <p>A record in a database is an object that can contain one more values. Groups of records are then saved in a table; the table defines the data that each record may contain. In a given database, there are multiple tables, each containing multiple records. Think of the rows and columns of a typical spreadsheet.<sup><a id="source-1-1" href="footnotes.html#footnote-1-1" epub:type="noteref">1</a></sup></p>
 
+    <p class="null_text_indent">Lets insert a new employee:</p>
+
+    <ul>
+        <li><b>Name:</b> Jessica White</li>
+        <li><b>Hire date:</b> 1/9/2015</li>
+        <li><b>Department:</b> Accounting</li>
+    </ul>
+
+    <p class="null_text_indent">The employee table have these fields:</p>
+
+    <ul>
+        <li><b>employeeID:</b> int primary key, auto increment</li>
+        <li><b>firstName:</b> varchar(30)</li>
+        <li><b>lastName:</b> varchar(30)</li>
+        <li><b>hireDate:</b> date</li>
+        <li><b>department:</b> varchar(60)</li>
+    </ul>
+
+    <p class="null_text_indent">So the data for those fields should be these:</p>
+
+    <ul>
+        <li><b>employeeID:</b> NULL. This value is inserted automatically.</li>
+        <li><b>firstName:</b> Jessica</li>
+        <li><b>lastName:</b> White</li>
+        <li><b>hireDate:</b> 1/9/2015</li>
+        <li><b>department:</b> Accounting</li>
+    </ul>
+
+    <p class="null_text_indent">To insert Jessica White as a new employee at the employee table, execute this command:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Jessica', 'White', '1/9/2015', 'Accounting');
+        </code>
+    </div>
+
+    <p>This is the syntax to insert a new record when you already know the order of the fields on the employee table. If you read the values between the parenthesis, you'll realize that those values are in a proper order.</p>
+
+    <p>The <b>NULL</b> keyword means that on the first field (employeeID) is not going to insert any value or it's unknown, the database engine will pick the next unused value from the AUTO_INCREMENT property and use that value instead of an actual NULL. Don't insert an actual value there unless you know what you are doing, just let the database engine do it's job.</p>
+
+    <p>Sometimes you don't have all the values or some of the record's values are unknown, in this case we use the NULL keyword in order to tell the database engine that we don't know that value for the record that we want to insert.</p>
+
+    <p>For example, assume we want to insert another employee, but this time we don't know what department he is going to be working for. So the department field is unknown. In this case we use this command:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+            <code>
+                <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Walter', 'Jones', '8/10/2018', NULL);
+            </code>
+        </div>
+
+    <p></p>
+
     <h2 id="selecting-data">Selecting data</h2>
 
     <h2 id="updating-data">Updating data</h2>
