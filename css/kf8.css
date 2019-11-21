@@ -7,6 +7,14 @@ ul
 	margin-left: 1em;
 }
 
+/* High light style for how to do section */
+.howtoBorder
+{
+	border-radius: 1em;
+	padding: 1% 2%;
+	background: #CED3D0;
+}
+
 /* Border to the examples */
 .exampleBorder
 {
@@ -14,12 +22,16 @@ ul
 	padding: 1%;
 }
 
-/* High light style for how to do section */
-.howtoBorder
+/* Border to the warnings */
+.warningBorder
 {
-	border-radius: 1em;
-	padding: 1% 2%;
-	background: #CED3D0;
+	border: .1em dashed red;
+	padding: 1%;
+}
+
+.warningText {
+	margin: 0%;
+	color: red;
 }
 
 /* Bold the text for sub title  */
