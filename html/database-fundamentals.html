@@ -632,19 +632,19 @@
 
     <h2 id="deleting-data">Deleting data</h2>
 
-    <p>Deleting records it's a dangerous business, just like the UPDATE statement, you need to think carefully before executing a <span class="key">DELETE</span> statement without a WHERE clause.</p>
+    <div class="warningBorder">
+        <p class="warningText text_align_center null_text_indent"><span class="emoji_large">&#9888;</span></p>
+
+        <p class="warningText text_align_left">Deleting records it's a dangerous business, just like the UPDATE statement, you need to think carefully before executing a <span class="key">DELETE</span> statement without a WHERE clause. Deleting an entire table on a production environment means that the system can go down for the day or even worse. Not having a backup of the deleted data it's more than enough for people to lose their jobs, so be careful.</p>
+    </div>
+    
 
     <p>The syntax for the DELETE statement it's as follows:</p>
 
-    <div class="exampleBorder" style="text-align: left;">
-        <code>DELETE FROM table_name WHERE condition;
-            <b>DELETE FROM</b> employee<br>
-            <b>WHERE</b><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;condition;<br>
-            <b>WHERE</b><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;firstName = 'Monica'<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>AND</b><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;lastName = 'Smith';
+    <div class="exampleBorder" style="text-align: center;">
+        <!-- DELETE FROM table_name WHERE condition; -->
+        <code>
+            <b>DELETE FROM</b> table_name <b>WHERE</b> condition;<br>
         </code>
     </div>
 
