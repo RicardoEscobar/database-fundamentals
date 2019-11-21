@@ -145,6 +145,11 @@ span.text_style3
 	text-transform:capitalize;
 }
 
+span.emoji_large {
+	font-size: 3em;
+	margin: 0%;
+}
+
 h1
 {
 	text-align:center;
