@@ -339,13 +339,13 @@
 
     <div class="exampleBorder" style="text-align: left;">
         <code>
-            <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Jessica', 'White', '2019-04-01', 'Accounting');
+            <b>INSERT INTO</b> employee <b>VALUES</b> (DEFAULT, 'Jessica', 'White', '2019-04-01', 'Accounting');
         </code>
     </div>
 
     <p>This is the syntax to insert a new record when you already know the order of the fields on the employee table. If you read the values between the parenthesis, you'll realize that those values are in a proper order.</p>
 
-    <p>The <b>NULL</b> keyword means that on the first field (employeeID) is not going to insert any value or it's unknown, the database engine will pick the next unused value from the AUTO_INCREMENT property and use that value instead of an actual NULL. Don't insert an actual value there unless you know what you are doing, just let the database engine do it's job.</p>
+    <p>The <b>DEFAULT</b> keyword means that on the first field (employeeID) it's going to insert whatever default value it's assigned for this record, the database engine will pick the next unused value from the AUTO_INCREMENT property and use that value. Don't insert an actual value there unless you know what you are doing, just let the database engine do it's job.</p>
 
     <p>Sometimes you don't have all the values or some of the record's values are unknown, in this case we use the NULL keyword in order to tell the database engine that we don't know that value for the record.</p>
 
@@ -353,7 +353,7 @@
 
     <div class="exampleBorder" style="text-align: left;">
             <code>
-                <b>INSERT INTO</b> employee <b>VALUES</b> (NULL, 'Walter', 'Jones', '2017-08-13', NULL);
+                <b>INSERT INTO</b> employee <b>VALUES</b> (DEFAULT, 'Walter', 'Jones', '2017-08-13', NULL);
             </code>
         </div>
 
@@ -631,6 +631,23 @@
     <p>I don't recommend to use actual names to look for specific records, so this example is merely academic. On the other hand, you can use an <span class="key">AND</span> keyword to specify two or even more conditions to be meet in order to execute the update statement. In later chapters, you'll get to use more sophisticated queries that use this and other keywords like <span class="key">OR</span> and <span class="key">NOT</span>, in the mean time we are getting started with simple examples.</p>
 
     <h2 id="deleting-data">Deleting data</h2>
+
+    <p>Deleting records it's a dangerous business, just like the UPDATE statement, you need to think carefully before executing a <span class="key">DELETE</span> statement without a WHERE clause.</p>
+
+    <p>The syntax for the DELETE statement it's as follows:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>DELETE FROM table_name WHERE condition;
+            <b>DELETE FROM</b> employee<br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;condition;<br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName = 'Monica'<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>AND</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName = 'Smith';
+        </code>
+    </div>
+
 
     <h2 id="alter-table">Alter table</h2>
 
