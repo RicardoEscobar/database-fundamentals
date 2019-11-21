@@ -16,7 +16,7 @@
 
     <p>I'm using <span class="key">MariaDB</span> as the database engine, some of these examples may differ depending on the database engine or the version. The source code on this book should work the same in <span class="key">MySQl</span>, most of the exercises are done in <span class="key">standard SQL</span> which means that you can use the source code as is, in standard SQL database engines.</p>
 
-    <p>The installation of a specific database engine is outside the scope of this book, however here is a YouTube video that I recorded with installation instructions to install <span class="key">MariaDB</span> on <span class="key"></span>Windows 10. You don't have to open that link on your eReader but you are welcome to try.</p>
+    <p>The installation of a specific database engine is outside the scope of this book, however here is a YouTube video that I recorded with installation instructions to install MariaDB on <span class="key">Windows 10</span>. You don't have to open that link on your eReader but you are welcome to try.</p>
 
     <a href="https://youtu.be/s39ENZ9mLmA">YouTube: How to install MariaDB on Windows 10.</a>
 
@@ -64,7 +64,7 @@
 
     <p>Whatever naming conventions you use, just remember to be consistent.</p>
 
-    <p>If you try to execute the same command again, the database engine may tell you that there was an <span class="key">Error: The human_resources database already exists.</span></p>
+    <p>If you try to execute the same command again, the database engine may tell you that there was an <b>Error: The human_resources database already exists.</b></p>
 
     <p>While learning, it's common that you'll need to recreate your databases from scratch or create them using a SQL script file. In order to delete (drop) the human_resources database and create it anew, use this command:</p>
 
@@ -242,7 +242,7 @@
 
     <p><b>WARNING: Be careful, this will delete the entire table and all it's data.</b></p>
 
-    <p>Next we create the actual fields of the employee table, the first and more important is the <span class="key">primary key</span> we define it like this:</p>
+    <p>Next we create the actual fields of the employee table, the first and more important is the primary key we define it like this:</p>
 
     <div class="exampleBorder">
         <code>
@@ -569,7 +569,7 @@
         </tr>
     </table>
 
-    <p>This happens often, that you execute an <span class="key">UPDATE</span> statement without a <span class="key">WHERE</span> clause. So it's important to add a filter just like in the SELECT statement, just that in this case is more important. And there is no CTRL-Z or undo function here, at least not in standard SQL, so having a filter in this statement is a must most of the time. If you screw up here, you better have a backup at hand.</p>
+    <p>This happens often, that you execute an <span class="key">UPDATE</span> statement without a WHERE clause. So it's important to add a filter just like in the SELECT statement, just that in this case is more important. And there is no CTRL-Z or undo function here, at least not in standard SQL, so having a filter in this statement is a must most of the time. If you screw up here, you better have a backup at hand.</p>
 
     <p>The syntax for the UPDATE statement it's pretty straight forward:</p>
 
