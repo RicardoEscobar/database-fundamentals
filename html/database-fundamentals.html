@@ -522,7 +522,7 @@
 
     <h2 id="updating-data">Updating data</h2>
 
-    <p>Now we are entering the danger zone. Inserting new data is not such a big deal compared to updating such data. Many times, the need to change anything will come and the feeling of dread will come along. Modifiyng something that has been there for years may sound like a daunting task, so let me show you the command that creates a lot of painful moments in the life of a database administrator:</p>
+    <p>Now we are entering the danger zone. Inserting new data is not such a big deal compared to updating such data. Many times, the need to change anything will come and the feeling of dread will come along. Modifying something that has been there for years may sound like a daunting task, so let me show you the command that creates a lot of painful moments in the life of a database administrator:</p>
 
     <div class="exampleBorder" style="text-align: center;">
         <code>
@@ -530,7 +530,7 @@
         </code>
     </div>
 
-    <p>At first glance this command just changes somone's first name to 'Sara', but who's name is going to get changed? That's the issue, everyone's first name it's now 'Sara'.</p>
+    <p>At first glance this command just changes someone's first name to 'Sara', but who's name is going to get changed? That's the issue, everyone's first name it's now 'Sara'.</p>
 
     <img  class="mobicontent" src="../images/table/employee_table_04.PNG" width="1002" height="306"/>
     <table class="defaultcontent table_group">
@@ -635,9 +635,10 @@
     <div class="warningBorder">
         <p class="warningText text_align_center null_text_indent"><span class="emoji_large">&#9888;</span></p>
 
-        <p class="warningText text_align_left">Deleting records it's a dangerous business, just like the UPDATE statement, you need to think carefully before executing a <span class="key">DELETE</span> statement without a WHERE clause. Deleting an entire table on a production environment means that the system can go down for the day or even worse. Not having a backup of the deleted data it's more than enough for people to lose their jobs, so be careful.</p>
+        <p class="warningText text_align_left">Deleting records it's a dangerous business, just like the UPDATE statement, you need to think carefully before executing a <span class="key">DELETE</span> statement without a WHERE clause.</p>
     </div>
-    
+
+    <p>Deleting an entire table on a production environment means that the system can go down for the day or even worse. Not having a backup of the deleted data it's more than enough for people to lose their jobs, so be careful.</p>
 
     <p>The syntax for the DELETE statement it's as follows:</p>
 
@@ -648,6 +649,29 @@
         </code>
     </div>
 
+    <p>As mention before, including a condition it's highly recommended unless you want to just delete the entire data from a table. Let's see some examples.</p>
+
+    <p>To delete all employees where the department it's unknown or it's missing, you can't evaluate a NULL against True or False or any other value, you need to use the <b>IS NULL</b> statement inside the <b>WHERE</b> clause like this:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <!-- DELETE FROM employee WHERE department IS NULL; -->
+        <code>
+            <b>DELETE FROM</b> employee <b>WHERE</b> department <b>IS NULL</b>;<br>
+        </code>
+    </div>
+
+    <p>This deletes records on the <i>employee</i> table that don't have an actual value at the <i>department</i> field. The <b>NULL</b> keyword it's used to refer to a missing piece of data or unknown data, it should never be used to represent an empty data like a numeric zero or an empty string.</p>
+
+    <p>Most of the time, you will delete a single record, just like the <b>UPDATE</b> statement, you'll use the <b>WHERE</b> clause to choose which one record to delete in this case, we use the <i>employeeID</i> field in order to do the delete:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <!-- DELETE FROM employee WHERE employeeID = 1; -->
+        <code>
+            <b>DELETE FROM</b> employee <b>WHERE</b> employeeID = 1;<br>
+        </code>
+    </div>
+
+    <p>Since the <i>employeeID</i> is unique, there is only one record with such value, so only one record is deleted. Again a word of caution. Delete records is a very dangerous thing to execute on a production environment. I recommend executing a <b>SELECT</b> statement with the <b>WHERE</b> clause that's supposed to be used by the <b>DELETE</b> statement, that way you'll know if you are actually deleting the desired records.</p>
 
     <h2 id="alter-table">Alter table</h2>
 
