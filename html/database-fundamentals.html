@@ -64,7 +64,7 @@
 
     <p>Whatever naming conventions you use, just remember to be consistent.</p>
 
-    <p>If you try to execute the same command again, the database engine may tell you that there was an <b>Error: The human_resources database already exists.</b></p>
+    <p>If you try to execute the same command again, the database engine may tell you that there was an <strong>Error: The human_resources database already exists.</strong></p>
 
     <p>While learning, it's common that you'll need to recreate your databases from scratch or create them using a SQL script file. In order to delete (drop) the human_resources database and create it anew, use this command:</p>
 
@@ -130,9 +130,9 @@
     <p>For example, for the <span class="key">firstName</span> and <span class="key">lastName</span> fields we may use <span class="key">varchar</span> data type, this is the data type used for text data, for the <span class="key">hireDate</span> we may use a <span class="key">date</span> data type. Notice that in the case of varchar, we may need to define how many characters are we allowed to store on that single field. Here is a list of the data types that we are going to use on this table on MariaDB:</p>
 
     <ul>
-        <li><b>INTEGER, INT.</b> Saves an integer number, no decimal point.</li>
-        <li><b>VARCHAR,</b> Saves a text field, must declare the maximum amount of characters allowed. Ex. VARCHAR(30)</li>
-        <li><b>DATE,</b> Stores a date data type, useful for saving dates and do date related operations and queries.</li>
+        <li><strong>INTEGER, INT.</strong> Saves an integer number, no decimal point.</li>
+        <li><strong>VARCHAR,</strong> Saves a text field, must declare the maximum amount of characters allowed. Ex. VARCHAR(30)</li>
+        <li><strong>DATE,</strong> Stores a date data type, useful for saving dates and do date related operations and queries.</li>
     </ul>
 
     <p>For a detailed list of the data types supported by MariaDB visit: <a href="https://mariadb.com/kb/en/library/data-types/">Data Types - MariaDB Knowledge Base</a></p>
@@ -238,9 +238,9 @@
         </code>
     </div>
 
-    <p>Similar to <b>CREATE OR REPLACE DATABASE</b>, we create the employee table and if it already exists, we replace it with a new version of it.</p>
+    <p>Similar to <strong>CREATE OR REPLACE DATABASE</strong>, we create the employee table and if it already exists, we replace it with a new version of it.</p>
 
-    <p><b>WARNING: Be careful, this will delete the entire table and all it's data.</b></p>
+    <p><strong>WARNING: Be careful, this will delete the entire table and all it's data.</strong></p>
 
     <p>Next we create the actual fields of the employee table, the first and more important is the primary key we define it like this:</p>
 
@@ -252,7 +252,7 @@
         </code>
     </div>
 
-    <p>The second line creates the <b>employeeID</b> field, the <b>INTEGER</b> keyword means that the field it's an integer number, <b>NOT NULL</b> means that this field may never be empty (NULL) when inserting or updating a record, it must always have a valid value, <b>AUTO_INCREMENT</b> means that if there is no value set for the new record or during and update for the record, the database engine will provide a valid auto numeric value to the field. This means that you just don't need to add a value to this field during an insert or update operation, the database engine already knows what to do. We'll see this in action on the next section.</p>
+    <p>The second line creates the <em>employeeID</em> field, the <strong>INTEGER</strong> keyword means that the field it's an integer number, <strong>NOT NULL</strong> means that this field may never be empty (NULL) when inserting or updating a record, it must always have a valid value, <strong>AUTO_INCREMENT</strong> means that if there is no value set for the new record or during and update for the record, the database engine will provide a valid auto numeric value to the field. This means that you just don't need to add a value to this field during an insert or update operation, the database engine already knows what to do. We'll see this in action on the next section.</p>
 
     <div class="exampleBorder">
         <code>
@@ -266,7 +266,7 @@
         </code>
     </div>
 
-    <p>In a similar fashion, we add the fields that are actually required: <b>firstName, lastName, hireDate</b> and <b>department</b>. These fields have their data types defined after their names, remember to follow these field declarations with a coma (,) in order to separate the fields from one another and avoid execution errors.</p>
+    <p>In a similar fashion, we add the fields that are actually required: <em>firstName, lastName, hireDate</em> and <em>department</em>. These fields have their data types defined after their names, remember to follow these field declarations with a coma (,) in order to separate the fields from one another and avoid execution errors.</p>
 
     <div class="exampleBorder">
         <code>
@@ -277,13 +277,13 @@
         </code>
     </div>
 
-    <p>Finally the last line defines the <b>CONSTRAINT</b> for the primary key. All primary keys are indexed, this means that a space in the database is dedicated to store not just the primary key itself, but the actual record in a index table that allows the database to locate an specific record quickly using the <b>employeeID</b> field as reference. We'll take a deep look at indexes in the future.</p>
+    <p>Finally the last line defines the <strong>CONSTRAINT</strong> for the primary key. All primary keys are indexed, this means that a space in the database is dedicated to store not just the primary key itself, but the actual record in a index table that allows the database to locate an specific record quickly using the <em>employeeID</em> field as reference. We'll take a deep look at indexes in the future.</p>
 
-    <p>The <b>employee_pk</b> keyword stands for &quot;employee primary key&quot; this is a unique name for this specific index in the entire database.</p>
+    <p>The <em>employee_pk</em> keyword stands for employee primary key this is a unique name for this specific index in the entire database.</p>
 
-    <p>The <b>PRIMARY KEY (</b>employeeID<b>));</b> code is used to select which field is to be taken into consideration as the primary key, in this case that's <b>employeeID</b>. This must be considered as part of the primary key, just as the field definition on line two.</p>
+    <p>The <strong>PRIMARY KEY</strong> (<em>employeeID</em>)); code is used to select which field is to be taken into consideration as the primary key, in this case that's <em>employeeID</em>. This must be considered as part of the primary key, just as the field definition on line two.</p>
 
-    <p>Finally we review the code for creating the <b>employee</b> table.</p>
+    <p>Finally we review the code for creating the <em>employee</em> table.</p>
 
     <div class="exampleBorder">
         <code>
@@ -297,15 +297,15 @@
         </code>
     </div>
 
-    <p>Note that there is no data on the <b>employee</b> table yet, we only created an empty table to be able to store the data into. Next we'll populate our table with actual data.</p>
+    <p>Note that there is no data on the <strong>employee</strong> table yet, we only created an empty table to be able to store the data into. Next we'll populate our table with actual data.</p>
 
     <p>This was the hard part, create the database, then create a table. Working with data is 90% of the job, and it's the easiest part of the job. Most database administrators don't spend their time designing and modeling databases, these were created long ago most of the time and you just need to focus on getting data from the database and presenting information in a meaningful manner.</p>
 
     <h2 id="inserting-data">Inserting data</h2>
 
-    <p>Now that you have the where to put data into, let's just do that. Data is inserted in the employee table in a <span class="key">record</span>.</p>
+    <p>Now that you have the where to put data into, let's just do that. Data is inserted in the employee table in a record.</p>
     
-    <p>A record in a database is an object that can contain one more values. Groups of records are then saved in a table; the table defines the data that each record may contain. In a given database, there are multiple tables, each containing multiple records. Think of the rows and columns of a typical spreadsheet.<sup><a id="source-1-1" href="footnotes.html#footnote-1-1" epub:type="noteref">1</a></sup></p>
+    <p>A <em>record</em> in a database is an object that can contain one more values. Groups of records are then saved in a table; the table defines the data that each record may contain. In a given database, there are multiple tables, each containing multiple records. Think of the rows and columns of a typical spreadsheet.<sup><a id="source-1-1" href="footnotes.html#footnote-1-1" epub:type="noteref">1</a></sup></p>
 
     <p class="null_text_indent">Lets insert a new employee:</p>
 
@@ -345,7 +345,7 @@
 
     <p>This is the syntax to insert a new record when you already know the order of the fields on the employee table. If you read the values between the parenthesis, you'll realize that those values are in a proper order.</p>
 
-    <p>The <b>DEFAULT</b> keyword means that on the first field (employeeID) it's going to insert whatever default value it's assigned for this record, the database engine will pick the next unused value from the AUTO_INCREMENT property and use that value. Don't insert an actual value there unless you know what you are doing, just let the database engine do it's job.</p>
+    <p>The <strong>DEFAULT</strong> keyword means that on the first field (employeeID) it's going to insert whatever default value it's assigned for this record, the database engine will pick the next unused value from the <strong>AUTO_INCREMENT</strong> property and use that value. Don't insert an actual value there unless you know what you are doing, just let the database engine do it's job.</p>
 
     <p>Sometimes you don't have all the values or some of the record's values are unknown, in this case we use the NULL keyword in order to tell the database engine that we don't know that value for the record.</p>
 
@@ -359,7 +359,7 @@
 
     <p>In the future, you'll create fields that have the property <span class="key">NOT NULL</span> like the primary key, if a field is marked as NOT NULL, then you either insert the value yourself or the database engine may do so via AUTO_INCREMENT or by DEFAULT value.</p>
 
-    <p><span class="key">DEFAULT</span> values, in the context of databases, are preset values defined for a column type. Default values are used when many records hold similar data.<sup><a id="source-1-2" href="footnotes.html#footnote-1-2" epub:type="noteref">2</a></sup></p>
+    <p><strong>DEFAULT</strong> values, in the context of databases, are preset values defined for a column type. Default values are used when many records hold similar data.<sup><a id="source-1-2" href="footnotes.html#footnote-1-2" epub:type="noteref">2</a></sup></p>
 
     <p>When you insert data into a table, the table itself may have a lot of fields or the actual values that you are inserting at a time may be incomplete. In this case, you may choose what fields to insert and ignore the others. To insert a new record on the employee table, use this command:</p>
 
@@ -374,7 +374,7 @@
 
     <p>This time you choose to insert a new record with only the name of the employee and it's department name. In tables with a lot of fields, this may come in handy.</p>
     
-    <p>So what happens with the rest of the fields? in this case they get NULL instead of an actual value. But that's not the behavior that may fit every situation, you may like to set a DEFAULT value for certain fields, for example the hireDate field may have a default value of the current date in the case that none is provided. During the table creation you may set this DEFAULT value with the use of a now() function like this:</p>
+    <p>So what happens with the rest of the fields? in this case they get <strong>NULL</strong> instead of an actual value. But that's not the behavior that may fit every situation, you may like to set a <strong>DEFAULT</strong> value for certain fields, for example the hireDate field may have a default value of the current date in the case that none is provided. During the table creation you may set this <strong>DEFAULT</strong> value with the use of a now() function like this:</p>
 
     <div class="exampleBorder">
         <code>
@@ -388,7 +388,7 @@
         </code>
     </div>
 
-    <p>In this version of the employee table, if no hireDate is inserted with the record, the database engine will provide one itself. This DEFAULT value is the result of the function <span class="key">NOW()</span> this function returns the current date and time, in this example, the hireDate field it's a DATE data type, so the NOW() function return a DATE value, this means that the time part it's removed and only the date part is stored in the hireDate field.</p>
+    <p>In this version of the employee table, if no hireDate is inserted with the record, the database engine will provide one itself. This <strong>DEFAULT</strong> value is the result of the function <span class="key">NOW()</span> this function returns the current date and time, in this example, the hireDate field it's a <strong>DATE</strong> data type, so the <strong>NOW()</strong> function return a <strong>DATE</strong> value, this means that the time part it's removed and only the date part is stored in the <em>hireDate</em> field.</p>
 
     <p>If you already have a table with data that you don't want to delete, I recommend reading the <a href="#alter-table">Alter table</a> section on this chapter, instead of replacing the employee table and start from scratch.</p>
 
@@ -651,7 +651,7 @@
 
     <p>As mention before, including a condition it's highly recommended unless you want to just delete the entire data from a table. Let's see some examples.</p>
 
-    <p>To delete all employees where the department it's unknown or it's missing, you can't evaluate a NULL against True or False or any other value, you need to use the <b>IS NULL</b> statement inside the <b>WHERE</b> clause like this:</p>
+    <p>To delete all employees where the department it's unknown or it's missing, you can't evaluate a NULL against True or False or any other value, you need to use the <strong>IS NULL</strong> statement inside the <strong>WHERE</strong> clause like this:</p>
 
     <div class="exampleBorder" style="text-align: center;">
         <!-- DELETE FROM employee WHERE department IS NULL; -->
@@ -660,9 +660,9 @@
         </code>
     </div>
 
-    <p>This deletes records on the <i>employee</i> table that don't have an actual value at the <i>department</i> field. The <b>NULL</b> keyword it's used to refer to a missing piece of data or unknown data, it should never be used to represent an empty data like a numeric zero or an empty string.</p>
+    <p>This deletes records on the <em>employee</em> table that don't have an actual value at the <em>department</em> field. The <strong>NULL</strong> keyword it's used to refer to a missing piece of data or unknown data, it should never be used to represent an empty data like a numeric zero or an empty string.</p>
 
-    <p>Most of the time, you will delete a single record, just like the <b>UPDATE</b> statement, you'll use the <b>WHERE</b> clause to choose which one record to delete in this case, we use the <i>employeeID</i> field in order to do the delete:</p>
+    <p>Most of the time, you will delete a single record, just like the <strong>UPDATE</strong> statement, you'll use the <strong>WHERE</strong> clause to choose which one record to delete in this case, we use the <em>employeeID</em> field in order to do the delete:</p>
 
     <div class="exampleBorder" style="text-align: center;">
         <!-- DELETE FROM employee WHERE employeeID = 1; -->
@@ -671,9 +671,15 @@
         </code>
     </div>
 
-    <p>Since the <i>employeeID</i> is unique, there is only one record with such value, so only one record is deleted. Again a word of caution. Delete records is a very dangerous thing to execute on a production environment. I recommend executing a <b>SELECT</b> statement with the <b>WHERE</b> clause that's supposed to be used by the <b>DELETE</b> statement, that way you'll know if you are actually deleting the desired records.</p>
+    <p>Since the <em>employeeID</em> is unique, there is only one record with such value, so only one record is deleted. Again a word of caution. Delete records is a very dangerous thing to execute on a production environment. I recommend executing a <strong>SELECT</strong> statement with the <strong>WHERE</strong> clause that's supposed to be used by the <strong>DELETE</strong> statement, that way you'll know if you are actually deleting the desired records.</p>
 
     <h2 id="alter-table">Alter table</h2>
+
+    <p>During software development, specially on the <em>Agile</em> methodologies, it's very common to have changes to the database structure. Inserting and deleting records is one thing, changing the structure or one or several tables is another.</p>
+
+    <p>Why would you need to change the structure a table? After all you design the database in such a way that the initial requirements are meet. And that may be true, yet initial requirements are just that, initial. Requirement's change and so the original design becomes obsolete. This is a good sigh. It means that it evolves for the better. The software initial solution gives life to new improvements or functionality.</p>
+
+    <p>Let's see an example. Remembering our <em>employee</em></p>
 
     <h2 id="drop-table">Drop a table</h2>
 
