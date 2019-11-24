@@ -758,7 +758,67 @@
         </code>
     </div>
 
-    <p>After executing this command, your table will have a new field with a default value of zero. Adding fields to an existing table is one of the most common altering commands that you'll ever face.</p>
+    <p>After executing this command, your table will have a new field with a default value of zero. You can see the new field with the default value of 0.0 (decimal) on the table like this:</p>
+
+    <img  class="mobicontent" src="../images/table/employee_table_01.PNG" width="1236" height="439"/>
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                style="font-weight:700">VARCHAR(60)</span></th>
+            <th class="column_name"><span style="font-weight:700">salary</span><br><span
+                style="font-weight:700">DECIMAL(13, 2)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Josh</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">1/5/2019</td>
+            <td class="table_data">Accounting</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Adam</td>
+            <td class="table_data">Black</td>
+            <td class="table_data">23/7/2018</td>
+            <td class="table_data">Human resources</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">1/9/2015</td>
+            <td class="table_data">Accounting</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">4</td>
+            <td class="table_data">James</td>
+            <td class="table_data">Stuart</td>
+            <td class="table_data">20/3/2017</td>
+            <td class="table_data">Sales</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+                <td class="table_data">5</td>
+                <td class="table_data">Jessica</td>
+                <td class="table_data">White</td>
+                <td class="table_data">27/10/2019</td>
+                <td class="table_data">Sales</td>
+                <td class="table_data highlight">0.0</td>
+        </tr>
+    </table>
+
+    <p> Adding fields to an existing table is one of the most common altering commands that you'll ever face.</p>
 
     <p>The alter command can be used to delete a field, yet this operation requires extreme caution if used on a table with actual data on the field that you desire to delete.</p>
 
@@ -771,7 +831,11 @@
         </code>
     </div>
 
+    <p>Note that if you are dropping a field, all data in that field is lost, so be careful.</p>
+
     <h2 id="drop-table">Drop a table</h2>
+
+    <p></p>
 
 </body>
 
