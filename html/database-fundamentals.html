@@ -240,7 +240,11 @@
 
     <p>Similar to <strong>CREATE OR REPLACE DATABASE</strong>, we create the employee table and if it already exists, we replace it with a new version of it.</p>
 
-    <p><strong>WARNING: Be careful, this will delete the entire table and all it's data.</strong></p>
+    <div class="warningBorder">
+        <p class="warningText text_align_center null_text_indent"><span class="emoji_large">&#9888;</span></p>
+
+        <p class="warningText text_align_center"><b>WARNING:</b> This will delete the entire table and all it's data.</p>
+    </div>
 
     <p>Next we create the actual fields of the employee table, the first and more important is the primary key we define it like this:</p>
 
@@ -835,7 +839,38 @@
 
     <h2 id="drop-table">Drop a table</h2>
 
-    <p></p>
+    <p>Why would you like to delete a table? Maybe you just imported data from a spreadsheet or a text file and everything landed on a temporary import table, after moving that data to it's final destination table, you may need to delete the temporary table afterwards.</p>
+
+    <p>Another reason may be that you just created a test table to try out things or experiment with data types. Whatever the reason may be, you can <strong>DROP</strong> a table to delete it and all it's data with this command:</p>
+
+    <!--DROP TABLE IF EXISTS table_name;-->
+    <div class="exampleBorder">
+        <code>
+            <i>-- Standard SQL</i><br>
+            <b>DROP</b> <i>table_name</i>;<br>
+            <br>
+            <i>-- MariaDB/MySQL allows IF EXISTS clause</i><br>
+            <b>DROP TABLE IF EXISTS</b> <i>table_name</i>;<br>
+        </code>
+    </div>
+
+    <p>If you want to drop the <em>employee</em> table, you can use this command:</p>
+
+<!--DROP TABLE employee;-->
+<!--DROP TABLE IF EXISTS employee;-->
+    <div class="exampleBorder">
+        <code>
+            <i>-- Standard SQL</i><br>
+            <b>DROP</b> <i>employee</i>;<br>
+            <br>
+            <i>-- MariaDB/MySQL allows IF EXISTS clause</i><br>
+            <b>DROP TABLE IF EXISTS</b> <i>employee</i>;<br>
+        </code>
+    </div>
+
+    <p>If you drop a table, remember that all data is lost along with that table's structure. There are techniques that you can use to keep a backup of the data using the database engine backup utilities and you may also develop a work around to ensure that the data and the table you are deleting is not harmful.</p>
+
+    <p>This is what most software developers work with in their projects. This is an incomplete information about databases and it's fundamentals. I invite you to read on to the complete book in order to come out of this hole and grow into a proper database administrator.</p>
 
 </body>
 
