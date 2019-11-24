@@ -10,8 +10,21 @@ ul
 /* Mobi reader introduces a default text indent so to adjust a 0 text indent to the mobi format */
 .exampleBorder
 {
-	border: .1em groove blue;
+	border: .1em dotted blue;
 	text-indent: 0px;
+}
+
+/* Mobi reader introduces a default text indent so to adjust a 0 text indent to the mobi format */*/
+.warningBorder
+{
+	border: .1em dashed red;
+	text-indent: 0px;
+}
+
+.warningText {
+	text-indent: 0px;
+	margin: 0%;
+	color: red;
 }
 
 /* Mobi reader introduces a default text indent so  0 text indent is applied to the mobi format */
@@ -92,6 +105,7 @@ p.roundborder2
 	text-indent: 0px;
 }
 
+/* This is used along dropcaps1 and .dropcaps2 classes in order to avoid first line indentation*/
 p.null_text_indent
 {
 	text-indent: 0px;

@@ -17,12 +17,13 @@
 		<item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
 		<item id="introduction" media-type="text/x-oeb1-document" href="html/introduction.html"></item>
 		<item id="database-fundamentals" media-type="text/x-oeb1-document" href="html/database-fundamentals.html"></item>
-
+		<item id="footnotes" media-type="text/x-oeb1-document" href="html/footnotes.html"></item>
 	</manifest>
 	<spine toc="ncx">
 		<itemref idref="content"/>
 		<itemref idref="introduction"/>
 		<itemref idref="database-fundamentals"/>
+		<itemref idref="footnotes"/>
 	</spine>
 	<guide>
 		<reference type="toc" title="Table of Contents" href="html/toc.html"/>

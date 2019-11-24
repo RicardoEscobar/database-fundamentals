@@ -12,21 +12,1032 @@
 
     <h1>Database fundamentals</h1>
 
-    <p class="null_text_indent"><span class="dropcaps1">D</span>ropcaps and intro paragraph.</p>
+    <p class="null_text_indent"><span class="dropcaps2">A</span> database is build from tables. A database without
+        tables is useless, not only there is no data, but there is no place to put data in. This is a <span
+            class="key">tutorial</span> chapter, which means that you'll touch a lot of subjects on the surface and not
+        deep enough, to avoid confusion, just assume that this is more like a guided tour of the basics, I don't expect
+        that you understand everything on this chapter, but I hope to give you a wide view of what the job asks from
+        you. And for you to see what the database business is about.</p>
+
+    <p>I'm using <span class="key">MariaDB</span> as the database engine, some of these examples may differ depending on
+        the database engine or the version. The source code on this book should work the same in <span
+            class="key">MySQl</span>, most of the exercises are done in <span class="key">standard SQL</span> which
+        means that you can use the source code as is, in standard SQL database engines.</p>
+
+    <p>The installation of a specific database engine is outside the scope of this book, however here is a YouTube video
+        that I recorded with installation instructions to install MariaDB on <span class="key">Windows 10</span>. You
+        don't have to open that link on your eReader but you are welcome to try.</p>
+
+    <a href="https://youtu.be/s39ENZ9mLmA">YouTube: How to install MariaDB on Windows 10.</a>
+
+    <p>There are plenty of tutorial and videos on whatever database engine you decide to use. This book is written as a
+        guide for SQL databases and most examples are done using standard SQL in order to allow you to use this
+        knowledge on whatever database engine you use.</p>
+
+    <p>I'm assuming that you already installed a database engine and that you can actually run queries on it.</p>
+
+    <p>Before creating a table and making queries, you need to create an actual database. For this chapter, we are
+        creating a database for a human resources department. Most of the time, you'll receive a document called <span
+            class="key">technical requirements</span> this document may say something like this:</p>
+
+    <center>
+        <p class="text_border null_text_indent" style="font-style: italic;">&quot;The company requires to store
+            information about it's employees and departments. We need to store their names, hire dates and the
+            department they belong to...&quot;</p>
+    </center>
+
+    <p>During this first chapter you'll learn what most programmers know, regarding database design and modeling. The
+        good news is that after reading this, you are pretty much in line with what most people already know about
+        databases, the bad news is that this knowledge is incomplete and leads to a painful path. Believe it or not,
+        this is what most people work with:</p>
+
+    <ul>
+        <li>Creating a database.</li>
+        <li>Create a table.</li>
+        <li>Inserting data.</li>
+        <li>Selecting data.</li>
+        <li>Updating data.</li>
+        <li>Deleting data.</li>
+        <li>Drop table.</li>
+    </ul>
 
     <h2 id="create-database">Creating a database</h2>
 
+    <p>To create a database you need to run this command on the database engine:</p>
+
+    <center class="exampleBorder">
+        <code>
+            <b>CREATE DATABASE</b> human_resources;
+        </code>
+    </center>
+
+    <p>You can replace &quot;human_resources&quot; with whatever database name you want. The naming conventions I use
+        are <span class="key">snake_case</span> where all words are lower cased and I use underscore instead of spaces.
+        I don't type &quot;human_resources_database&quot; because it's implied that all databases are just that,
+        databases. So I don't need to write the word database on every database I create.</p>
+
+    <p>If recommend that you save these commands into a text file for easy replication. Text files with SQL queries are
+        called scripts. You can name your scripts with the SQL extension to allow your file system to locate the
+        recommended software to use in order to open these files.</p>
+
+    <p>Example SQL script names:</p>
+
+    <ul>
+        <li>script.sql</li>
+        <li>human_resources_script.sql</li>
+        <li>human_resources.sql</li>
+    </ul>
+
+    <p>Whatever naming conventions you use, just remember to be consistent.</p>
+
+    <p>If you try to execute the same command again, the database engine may tell you that there was an <strong>Error:
+            The human_resources database already exists.</strong></p>
+
+    <p>While learning, it's common that you'll need to recreate your databases from scratch or create them using a SQL
+        script file. In order to delete (drop) the human_resources database and create it anew, use this command:</p>
+
+    <center class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE DATABASE</b> human_resources;
+        </code>
+    </center>
+
+    <p>This command will create the &quot;human_resources&quot; database, if it already exist, it will delete it and
+        create a new one without any tables or data.</p>
+
+    <p>The database you just created is empty, there is no data and there is no place to put the data into. In order to
+        put data into a database we need to create tables, inside that database. Before doing anything else, we need to
+        open the database in order to execute more queries (instructions for the database engine to execute).</p>
+
+    <p>To open the &quot;human_resources&quot; database, execute this command:</p>
+
+    <center class="exampleBorder">
+        <code>
+            <b>USE</b> human_resources;
+        </code>
+    </center>
+
+    <p>Now you can execute queries upon the &quot;human_resources&quot; database. Next we need to create a place to put
+        data into, let's create a table.</p>
+
     <h2 id="create-table">Create a table</h2>
+
+    <p>If we recall the requirements for this database, we get this:</p>
+
+    <center>
+        <p class="text_border null_text_indent" style="font-style: italic;">&quot;The company requires to store
+            information about it's employees and departments. We need to store their names, hire dates and the
+            department they belong to...&quot;</p>
+    </center>
+
+    <p>With so little information be sure that whatever design you do at this time, it's going to get changed in the
+        future, don't feel mad or frustrated, that's just how it is. But we are going to be working to get to the best
+        version of the database as soon as possible.</p>
+
+    <p>The first thing to identify is the actual requirements to meet. After reading the requirements you can see that
+        the database should be able to store these data:</p>
+
+    <ul>
+        <li>Employee name.</li>
+        <li>Employee hire date.</li>
+        <li>Employee's department.</li>
+    </ul>
+
+    <p>A word that we read here a lot in there it's <span class="key">employee</span>. So It's natural that our table
+        name is just that: &quot;employee&quot;, I name tables in singular not plural and I use the <span
+            class="key">camelCase</span>, naming convention. That means that the first letter of the name is lower case
+        and instead of space, I join all the words and make a separation using a upper case letter, for example:
+        firstName, employeeNorthOffice, employeeSalary, etc.</p>
+
+    <p>Our table's name it's &quot;employee&quot;</p>
+
+    <p>Next we need to add fields to insert our data into, my first proposal would be these fields:</p>
+
+    <ul>
+        <li>name</li>
+        <li>hireDate</li>
+        <li>department</li>
+    </ul>
+
+    <p>Simple. Yet in the case of people's names, it's often required to store them in two fields: <span
+            class="key">first name</span> and <span class="key">last name</span>, this allows you to search employees by
+        last name or first name, also allows you to order these records using last names, quite useful on a lot of
+        circumstances. So the proposed table fields would end like this:</p>
+
+    <ul>
+        <li>firstName</li>
+        <li>lastName</li>
+        <li>hireDate</li>
+        <li>department</li>
+    </ul>
+
+    <p>Fields on a table must be declared of a certain <span class="key">data type</span>, on databases, data types are
+        used to impose rules and restrictions on the data to be stored. Depending of the type of data to be stored, you
+        should chose a field data type.</p>
+
+    <p>For example, for the <span class="key">firstName</span> and <span class="key">lastName</span> fields we may use
+        <span class="key">varchar</span> data type, this is the data type used for text data, for the <span
+            class="key">hireDate</span> we may use a <span class="key">date</span> data type. Notice that in the case of
+        varchar, we may need to define how many characters are we allowed to store on that single field. Here is a list
+        of the data types that we are going to use on this table on MariaDB:</p>
+
+    <ul>
+        <li><strong>INTEGER, INT.</strong> Saves an integer number, no decimal point.</li>
+        <li><strong>VARCHAR,</strong> Saves a text field, must declare the maximum amount of characters allowed. Ex.
+            VARCHAR(30)</li>
+        <li><strong>DATE,</strong> Stores a date data type, useful for saving dates and do date related operations and
+            queries.</li>
+    </ul>
+
+    <p>For a detailed list of the data types supported by MariaDB visit: <a
+            href="https://mariadb.com/kb/en/library/data-types/">Data Types - MariaDB Knowledge Base</a></p>
+
+    <p>If you are using another database engine, please look for your database documentation on the Internet.</p>
+
+    <p>In our case, our employee table would have these fields:</p>
+
+    <ul>
+        <li>firstName, VARCHAR(30)</li>
+        <li>lastName, VARCHAR(30)</li>
+        <li>hireDate, DATE</li>
+        <li>department, VARCHAR(60)</li>
+    </ul>
+
+    <p>So were does INTEGER come into play? We missed an important field that does not come defined in the technical
+        requirements, that's the concept of the <span class="key">primary key</span>. A primary key, also called a
+        primary keyword, is a key in a relational database that is unique for each record. This value helps identifying
+        a single record as unique on the entire table. In our case, we will create a primary key of type INTEGER. Since
+        this field is artificial, which means that it's not part of the actual data required.</p>
+
+    <p>So we create a field called <span class="key">employeeID</span> this field will store an INTEGER number and it
+        will be auto incremented field, this means that the number it's introduced by the database engine itself in
+        order to avoid duplication and ensure the value it's unique for the entire table.</p>
+
+    <p>So we end up with this list of fields for the employee table:</p>
+
+    <ul>
+        <li>employeeID, INTEGER</li>
+        <li>firstName, VARCHAR(30)</li>
+        <li>lastName, VARCHAR(30)</li>
+        <li>hireDate, DATE</li>
+        <li>department, VARCHAR(60)</li>
+    </ul>
+
+    <p>To visualize the <span class="key">employee</span>, table we may represent it like a spreadsheet:</p>
+
+    <img class="mobicontent" src="../images/table/employee_table_01.PNG" width="1009" height="441" />
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                    style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                    style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Josh</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">1/5/2019</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Adam</td>
+            <td class="table_data">Black</td>
+            <td class="table_data">23/7/2018</td>
+            <td class="table_data">Human resources</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">1/9/2015</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">4</td>
+            <td class="table_data">James</td>
+            <td class="table_data">Stuart</td>
+            <td class="table_data">20/3/2017</td>
+            <td class="table_data">Sales</td>
+        </tr>
+        <tr>
+            <td class="table_data">5</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">27/10/2019</td>
+            <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
+    <p>So after all, it's time to actually code the table in SQL. Let's see the command to create the employee table
+        then examine it to understand the details.</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
+
+    <p>Now that's a mouthful. Lets divide and conquer this query by focusing on the first line:</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        </code>
+    </div>
+
+    <p>Similar to <strong>CREATE OR REPLACE DATABASE</strong>, we create the employee table and if it already exists, we
+        replace it with a new version of it.</p>
+
+    <div class="warningBorder">
+        <p class="warningText text_align_center null_text_indent"><span class="emoji_large">&#9888;</span></p>
+
+        <p class="warningText text_align_center null_text_indent"><b>WARNING:</b> This will delete the entire table and all it's data.
+        </p>
+    </div>
+
+    <p>Next we create the actual fields of the employee table, the first and more important is the primary key we define
+        it like this:</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        </code>
+    </div>
+
+    <p>The second line creates the <em>employeeID</em> field, the <strong>INTEGER</strong> keyword means that the field
+        it's an integer number, <strong>NOT NULL</strong> means that this field may never be empty (NULL) when inserting
+        or updating a record, it must always have a valid value, <strong>AUTO_INCREMENT</strong> means that if there is
+        no value set for the new record or during and update for the record, the database engine will provide a valid
+        auto numeric value to the field. This means that you just don't need to add a value to this field during an
+        insert or update operation, the database engine already knows what to do. We'll see this in action on the next
+        section.</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+        </code>
+    </div>
+
+    <p>In a similar fashion, we add the fields that are actually required: <em>firstName, lastName, hireDate</em> and
+        <em>department</em>. These fields have their data types defined after their names, remember to follow these
+        field declarations with a coma (,) in order to separate the fields from one another and avoid execution errors.
+    </p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>-- Code elided for clarity...</i><br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
+
+    <p>Finally the last line defines the <strong>CONSTRAINT</strong> for the primary key. All primary keys are indexed,
+        this means that a space in the database is dedicated to store not just the primary key itself, but the actual
+        record in a index table that allows the database to locate an specific record quickly using the
+        <em>employeeID</em> field as reference. We'll take a deep look at indexes in the future.</p>
+
+    <p>The <em>employee_pk</em> keyword stands for employee primary key this is a unique name for this specific index in
+        the entire database.</p>
+
+    <p>The <strong>PRIMARY KEY</strong> (<em>employeeID</em>)); code is used to select which field is to be taken into
+        consideration as the primary key, in this case that's <em>employeeID</em>. This must be considered as part of
+        the primary key, just as the field definition on line two.</p>
+
+    <p>Finally we review the code for creating the <em>employee</em> table.</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
+
+    <p>Note that there is no data on the <strong>employee</strong> table yet, we only created an empty table to be able
+        to store the data into. Next we'll populate our table with actual data.</p>
+
+    <p>This was the hard part, create the database, then create a table. Working with data is 90% of the job, and it's
+        the easiest part of the job. Most database administrators don't spend their time designing and modeling
+        databases, these were created long ago most of the time and you just need to focus on getting data from the
+        database and presenting information in a meaningful manner.</p>
 
     <h2 id="inserting-data">Inserting data</h2>
 
+    <p>Now that you have the where to put data into, let's just do that. Data is inserted in the employee table in a
+        record.</p>
+
+    <p>A <em>record</em> in a database is an object that can contain one more values. Groups of records are then saved
+        in a table; the table defines the data that each record may contain. In a given database, there are multiple
+        tables, each containing multiple records. Think of the rows and columns of a typical spreadsheet.<sup><a
+                id="source-1-1" href="footnotes.html#footnote-1-1" epub:type="noteref">1</a></sup></p>
+
+    <p class="null_text_indent">Lets insert a new employee:</p>
+
+    <ul>
+        <li><b>Name:</b> Jessica White</li>
+        <li><b>Hire date:</b> 1/9/2015</li>
+        <li><b>Department:</b> Accounting</li>
+    </ul>
+
+    <p class="null_text_indent">The employee table have these fields:</p>
+
+    <ul>
+        <li><b>employeeID:</b> int primary key, auto increment</li>
+        <li><b>firstName:</b> varchar(30)</li>
+        <li><b>lastName:</b> varchar(30)</li>
+        <li><b>hireDate:</b> date</li>
+        <li><b>department:</b> varchar(60)</li>
+    </ul>
+
+    <p class="null_text_indent">So the data for those fields should be these:</p>
+
+    <ul>
+        <li><b>employeeID:</b> NULL. This value is inserted automatically.</li>
+        <li><b>firstName:</b> Jessica</li>
+        <li><b>lastName:</b> White</li>
+        <li><b>hireDate:</b> 1/9/2015</li>
+        <li><b>department:</b> Accounting</li>
+    </ul>
+
+    <p class="null_text_indent">To insert Jessica White as a new employee at the employee table, execute this command:
+    </p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>INSERT INTO</b> employee <b>VALUES</b> (DEFAULT, 'Jessica', 'White', '2019-04-01', 'Accounting');
+        </code>
+    </div>
+
+    <p>This is the syntax to insert a new record when you already know the order of the fields on the employee table. If
+        you read the values between the parenthesis, you'll realize that those values are in a proper order.</p>
+
+    <p>The <strong>DEFAULT</strong> keyword means that on the first field (employeeID) it's going to insert whatever
+        default value it's assigned for this record, the database engine will pick the next unused value from the
+        <strong>AUTO_INCREMENT</strong> property and use that value. Don't insert an actual value there unless you know
+        what you are doing, just let the database engine do it's job.</p>
+
+    <p>Sometimes you don't have all the values or some of the record's values are unknown, in this case we use the NULL
+        keyword in order to tell the database engine that we don't know that value for the record.</p>
+
+    <p>For example, assume we want to insert another employee, but this time we don't know what department he is going
+        to be working for. So the department field is unknown. In this case we use this command:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+                <b>INSERT INTO</b> employee <b>VALUES</b> (DEFAULT, 'Walter', 'Jones', '2017-08-13', NULL);
+            </code>
+    </div>
+
+    <p>In the future, you'll create fields that have the property <span class="key">NOT NULL</span> like the primary
+        key, if a field is marked as NOT NULL, then you either insert the value yourself or the database engine may do
+        so via AUTO_INCREMENT or by DEFAULT value.</p>
+
+    <p><strong>DEFAULT</strong> values, in the context of databases, are preset values defined for a column type.
+        Default values are used when many records hold similar data.<sup><a id="source-1-2"
+                href="footnotes.html#footnote-1-2" epub:type="noteref">2</a></sup></p>
+
+    <p>When you insert data into a table, the table itself may have a lot of fields or the actual values that you are
+        inserting at a time may be incomplete. In this case, you may choose what fields to insert and ignore the others.
+        To insert a new record on the employee table, use this command:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>INSERT INTO</b> employee<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;(firstName, lastName, department)<br>
+            <b>VALUES</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;('Walter', 'Jones', 'Sales');
+        </code>
+    </div>
+
+    <p>This time you choose to insert a new record with only the name of the employee and it's department name. In
+        tables with a lot of fields, this may come in handy.</p>
+
+    <p>So what happens with the rest of the fields? in this case they get <strong>NULL</strong> instead of an actual
+        value. But that's not the behavior that may fit every situation, you may like to set a <strong>DEFAULT</strong>
+        value for certain fields, for example the hireDate field may have a default value of the current date in the
+        case that none is provided. During the table creation you may set this <strong>DEFAULT</strong> value with the
+        use of a now() function like this:</p>
+
+    <div class="exampleBorder">
+        <code>
+            <b>CREATE OR REPLACE TABLE </b>employee (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID <b>INTEGER NOT NULL AUTO_INCREMENT,</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName <b>VARCHAR(30),</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate <b>DATE DEFAULT NOW()</b>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department <b>VARCHAR(60)</b>,<br>
+            <b>CONSTRAINT</b> employee_pk <b>PRIMARY KEY (</b>employeeID<b>));</b><br>
+        </code>
+    </div>
+
+    <p>In this version of the employee table, if no hireDate is inserted with the record, the database engine will
+        provide one itself. This <strong>DEFAULT</strong> value is the result of the function <span
+            class="key">NOW()</span> this function returns the current date and time, in this example, the hireDate
+        field it's a <strong>DATE</strong> data type, so the <strong>NOW()</strong> function return a
+        <strong>DATE</strong> value, this means that the time part it's removed and only the date part is stored in the
+        <em>hireDate</em> field.</p>
+
+    <p>If you already have a table with data that you don't want to delete, I recommend reading the <a
+            href="#alter-table">Alter table</a> section on this chapter, instead of replacing the employee table and
+        start from scratch.</p>
+
     <h2 id="selecting-data">Selecting data</h2>
+
+    <p>Now that you have the means to create a table and inserting records on a table, we now face the issue of listing
+        records or selecting them. We may use this command to select all records from the employee table:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <code>
+            <b>SELECT</b> * <b>FROM</b> employee;
+        </code>
+    </div>
+
+    <p>After executing the <span class="key">SELECT</span> statement, you'll get a list similar to this:</p>
+
+    <img class="mobicontent" src="../images/table/employee_table_02.PNG" width="1004" height="308" />
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                    style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                    style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">2019-04-01</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Walter</td>
+            <td class="table_data">Jones</td>
+            <td class="table_data">2017-08-13</td>
+            <td class="table_data">NULL</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Monica</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">2019-11-15</td>
+            <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
+    <p>Most of the time a SELECT ALL RECORDS is not the best strategy, specially if you are working with a large
+        dataset, a table with millions of records may prove to be hard to use, so filtering the results is in order.
+        Filtering results can be achieve with the <span class="key">WHERE</span> clause, this clause is used like this:
+    </p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> employeeID = 1;
+        </code>
+    </div>
+
+    <p>In this example, you are getting all records WHERE the employeeID is equal to '1'. In this case there is only one
+        record:</p>
+
+    <img class="mobicontent" src="../images/table/employee_table_03.PNG" width="1003" height="174" />
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                    style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                    style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">2019-04-01</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+    </table>
+
+    <p>In later chapters we'll get a lot more practical examples. Since selecting data it's the most used SQL statement
+        by far, let's make some more examples.</p>
+
+    <p>If you want to select all employees that belong to the &quot;Sales&quot; department:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> department = 'Sales';
+        </code>
+    </div>
+
+    <p>If you want to select all employees that have not yet being assigned a department:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> department <b>IS NOT NULL</b>;
+        </code>
+    </div>
+
+    <p>If you want to select all employees that their &quot;last name&quot; is &quot;Jones&quot;:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> lastName = 'Jones';
+        </code>
+    </div>
+
+    <p>If you want to select all employees hired between 2018 and 2019 :</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>SELECT</b> *<br>
+            <b>FROM</b> employee<br>
+            <b>WHERE</b> hireDate <b>BETWEEN</b> '2018-01-01' <b>AND</b> '2020-01-01';
+        </code>
+    </div>
+
+    <p>In this example, '2020-01-01' it's used instead of '2019-12-31' because the end date starts at the zero hour of
+        such date. So, if '2019-12-31' is used, the last day of 2019 will not be taken into consideration.</p>
 
     <h2 id="updating-data">Updating data</h2>
 
+    <p>Now we are entering the danger zone. Inserting new data is not such a big deal compared to updating such data.
+        Many times, the need to change anything will come and the feeling of dread will come along. Modifying something
+        that has been there for years may sound like a daunting task, so let me show you the command that creates a lot
+        of painful moments in the life of a database administrator:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <code>
+            <b>UPDATE</b> employee <b>SET</b> firstName = 'Sara';
+        </code>
+    </div>
+
+    <p>At first glance this command just changes someone's first name to 'Sara', but who's name is going to get changed?
+        That's the issue, everyone's first name it's now 'Sara'.</p>
+
+    <img class="mobicontent" src="../images/table/employee_table_04.PNG" width="1002" height="306" />
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                    style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                    style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Sara</td>
+            <td class="table_data">White</td>
+            <td class="table_data">2019-04-01</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Sara</td>
+            <td class="table_data">Jones</td>
+            <td class="table_data">2017-08-13</td>
+            <td class="table_data">NULL</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Sara</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">2019-11-15</td>
+            <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
+    <p>This happens often, that you execute an <span class="key">UPDATE</span> statement without a WHERE clause. So it's
+        important to add a filter just like in the SELECT statement, just that in this case is more important. And there
+        is no CTRL-Z or undo function here, at least not in standard SQL, so having a filter in this statement is a must
+        most of the time. If you screw up here, you better have a backup at hand.</p>
+
+    <p>The syntax for the UPDATE statement it's pretty straight forward:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> table_name<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;column1 = value1,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;column2 = value2, ...<br>
+            <b>WHERE</b> condition;
+        </code>
+    </div>
+
+    <p>Some common examples include:</p>
+
+    <p>Update the hire date of Jessica White to today's date:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> employee<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate = <b>NOW()</b><br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID = 1; <i>-- Jessica White's employeeID number</i>
+        </code>
+    </div>
+
+    <p>In this example, you rather use the <i>employeeID</i> number instead of the employee's actual name, if there is
+        more than one Jessica White, both are going to get affected. In most update operations that handle single record
+        updates, the use of the primary key is crucial to select just the desired record.</p>
+
+    <p>Set Walter Jones's department to 'Human resources' and his hire date to today's date:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> employee<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;department = 'Human resources',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;hireDate = <b>NOW()</b><br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;employeeID = 2; <i>-- Walter Jones's employeeID number</i>
+        </code>
+    </div>
+
+    <p>This time, we updated two fields at the same time. We can update more than a single field on every update
+        operation. This is really useful when handling several data updates for a single record.</p>
+
+    <p>Change Monica Smith's name to 'Sara' Smith:</p>
+
+    <div class="exampleBorder" style="text-align: left;">
+        <code>
+            <b>UPDATE</b> employee<br>
+            <b>SET</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName = 'Sara'<br>
+            <b>WHERE</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;firstName = 'Monica'<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>AND</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;lastName = 'Smith';
+        </code>
+    </div>
+
+    <p>I don't recommend to use actual names to look for specific records, so this example is merely academic. On the
+        other hand, you can use an <span class="key">AND</span> keyword to specify two or even more conditions to be
+        meet in order to execute the update statement. In later chapters, you'll get to use more sophisticated queries
+        that use this and other keywords like <span class="key">OR</span> and <span class="key">NOT</span>, in the mean
+        time we are getting started with simple examples.</p>
+
     <h2 id="deleting-data">Deleting data</h2>
 
+    <div class="warningBorder">
+        <p class="warningText text_align_center null_text_indent"><span class="emoji_large">&#9888;</span></p>
+
+        <p class="warningText text_align_left">Deleting records it's a dangerous business, just like the UPDATE
+            statement, you need to think carefully before executing a <span class="key">DELETE</span> statement without
+            a WHERE clause.</p>
+    </div>
+
+    <p>Deleting an entire table on a production environment means that the system can go down for the day or even worse.
+        Not having a backup of the deleted data it's more than enough for people to lose their jobs, so be careful.</p>
+
+    <p>The syntax for the DELETE statement it's as follows:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <!-- DELETE FROM table_name WHERE condition; -->
+        <code>
+            <b>DELETE FROM</b> table_name <b>WHERE</b> condition;<br>
+        </code>
+    </div>
+
+    <p>As mention before, including a condition it's highly recommended unless you want to just delete the entire data
+        from a table. Let's see some examples.</p>
+
+    <p>To delete all employees where the department it's unknown or it's missing, you can't evaluate a NULL against True
+        or False or any other value, you need to use the <strong>IS NULL</strong> statement inside the
+        <strong>WHERE</strong> clause like this:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <!-- DELETE FROM employee WHERE department IS NULL; -->
+        <code>
+            <b>DELETE FROM</b> employee <b>WHERE</b> department <b>IS NULL</b>;<br>
+        </code>
+    </div>
+
+    <p>This deletes records on the <em>employee</em> table that don't have an actual value at the <em>department</em>
+        field. The <strong>NULL</strong> keyword it's used to refer to a missing piece of data or unknown data, it
+        should never be used to represent an empty data like a numeric zero or an empty string.</p>
+
+    <p>Most of the time, you will delete a single record, just like the <strong>UPDATE</strong> statement, you'll use
+        the <strong>WHERE</strong> clause to choose which one record to delete in this case, we use the
+        <em>employeeID</em> field in order to do the delete:</p>
+
+    <div class="exampleBorder" style="text-align: center;">
+        <!-- DELETE FROM employee WHERE employeeID = 1; -->
+        <code>
+            <b>DELETE FROM</b> employee <b>WHERE</b> employeeID = 1;<br>
+        </code>
+    </div>
+
+    <p>Since the <em>employeeID</em> is unique, there is only one record with such value, so only one record is deleted.
+        Again a word of caution. Delete records is a very dangerous thing to execute on a production environment. I
+        recommend executing a <strong>SELECT</strong> statement with the <strong>WHERE</strong> clause that's supposed
+        to be used by the <strong>DELETE</strong> statement, that way you'll know if you are actually deleting the
+        desired records.</p>
+
+    <h2 id="alter-table">Alter table</h2>
+
+    <p>During software development, specially on the <em>Agile</em> methodologies, it's very common to have changes to
+        the database structure. Inserting and deleting records is one thing, changing the structure or one or several
+        tables is another.</p>
+
+    <p>Why would you need to change the structure a table? After all you design the database in such a way that the
+        initial requirements are meet. And that may be true, yet initial requirements are just that, initial.
+        Requirement's change and so the original design becomes obsolete. This is a good sigh. It means that it evolves
+        for the better. The software initial solution gives life to new improvements or functionality.</p>
+
+    <p>Let's see an example.</p>
+
+    <p>Remember that your <em>employee</em> table, have these fields:</p>
+
+    <ul>
+        <li>employeeID, INTEGER</li>
+        <li>firstName, VARCHAR(30)</li>
+        <li>lastName, VARCHAR(30)</li>
+        <li>hireDate, DATE</li>
+        <li>department, VARCHAR(60)</li>
+    </ul>
+
+    <p>To visualize the <span class="key">employee</span> table, we may represent it like a spreadsheet:</p>
+
+    <img class="mobicontent" src="../images/table/employee_table_01.PNG" width="1009" height="441" />
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                    style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                    style="font-weight:700">VARCHAR(60)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Josh</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">1/5/2019</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Adam</td>
+            <td class="table_data">Black</td>
+            <td class="table_data">23/7/2018</td>
+            <td class="table_data">Human resources</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">1/9/2015</td>
+            <td class="table_data">Accounting</td>
+        </tr>
+        <tr>
+            <td class="table_data">4</td>
+            <td class="table_data">James</td>
+            <td class="table_data">Stuart</td>
+            <td class="table_data">20/3/2017</td>
+            <td class="table_data">Sales</td>
+        </tr>
+        <tr>
+            <td class="table_data">5</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">27/10/2019</td>
+            <td class="table_data">Sales</td>
+        </tr>
+    </table>
+
+    <p>And after a week you are asked to include the salary of every employee as a new field for the <em>employee</em>
+        table. This requires you to add a new field on the table.</p>
+
+    <p>To add a <em>salary</em> field to the <em>employee</em> table, you need to choose data type for the new field. In
+        this case, to represent money we'll use <strong>DECIMAL</strong> data type, for MariaDB. This data type,
+        requires you to define the total number of digits (the precision) and the number of digits after the decimal
+        point (the scale). Like this: <strong>DECIMAL(13,2)</strong></p>
+
+    <p>If we want to add a <em>salary</em> field to the <em>employee</em> table we would use this command:</p>
+
+    <!--ALTER TABLE employee ADD salary DECIMAL(13, 2) DEFAULT 0.0;-->
+    <div class="exampleBorder">
+        <code>
+            <b>ALTER TABLE</b> employee<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>ADD</b> salary <b>DECIMAL</b>(13, 2) <b>DEFAULT</b> 0.0;<br>
+        </code>
+    </div>
+
+    <p>After executing this command, your table will have a new field with a default value of zero. You can see the new
+        field with the default value of 0.0 (decimal) on the table like this:</p>
+
+    <img class="mobicontent" src="../images/table/employee_table_01.PNG" width="1236" height="439" />
+    <table class="defaultcontent table_group">
+        <tr>
+            <th class="column_name"><span style="font-weight:700">employeeID</span><br><span
+                    style="font-weight:700">INT, Primary key</span></th>
+            <th class="column_name"><span style="font-weight:700">firstName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">lastName</span><br><span
+                    style="font-weight:700">VARCHAR(30)</span></th>
+            <th class="column_name"><span style="font-weight:700">hireDate</span><br><span
+                    style="font-weight:700">DATE</span></th>
+            <th class="column_name"><span style="font-weight:700">department</span><br><span
+                    style="font-weight:700">VARCHAR(60)</span></th>
+            <th class="column_name"><span style="font-weight:700">salary</span><br><span
+                    style="font-weight:700">DECIMAL(13, 2)</span></th>
+        </tr>
+        <tr>
+            <td class="table_data">1</td>
+            <td class="table_data">Josh</td>
+            <td class="table_data">Smith</td>
+            <td class="table_data">1/5/2019</td>
+            <td class="table_data">Accounting</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">2</td>
+            <td class="table_data">Adam</td>
+            <td class="table_data">Black</td>
+            <td class="table_data">23/7/2018</td>
+            <td class="table_data">Human resources</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">3</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">1/9/2015</td>
+            <td class="table_data">Accounting</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">4</td>
+            <td class="table_data">James</td>
+            <td class="table_data">Stuart</td>
+            <td class="table_data">20/3/2017</td>
+            <td class="table_data">Sales</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+        <tr>
+            <td class="table_data">5</td>
+            <td class="table_data">Jessica</td>
+            <td class="table_data">White</td>
+            <td class="table_data">27/10/2019</td>
+            <td class="table_data">Sales</td>
+            <td class="table_data highlight">0.0</td>
+        </tr>
+    </table>
+
+    <p> Adding fields to an existing table is one of the most common altering commands that you'll ever face.</p>
+
+    <p>The alter command can be used to delete a field, yet this operation requires extreme caution if used on a table
+        with actual data on the field that you desire to delete.</p>
+
+    <p>An example for removing the recently created <em>salary</em> field, you would use this command:</p>
+
+    <!--ALTER TABLE employee DROP IF EXISTS salary;-->
+    <div class="exampleBorder">
+        <code>
+            <b>ALTER TABLE</b> employee <b>DROP IF EXISTS</b> salary;<br>
+        </code>
+    </div>
+
+    <p>Note that if you are dropping a field, all data in that field is lost, so be careful.</p>
+
     <h2 id="drop-table">Drop a table</h2>
+
+    <p>Why would you like to delete a table? Maybe you just imported data from a spreadsheet or a text file and
+        everything landed on a temporary import table, after moving that data to it's final destination table, you may
+        need to delete the temporary table afterwards.</p>
+
+    <p>Another reason may be that you just created a test table to try out things or experiment with data types.
+        Whatever the reason may be, you can <strong>DROP</strong> a table to delete it and all it's data with this
+        command:</p>
+
+    <!--DROP TABLE IF EXISTS table_name;-->
+    <div class="exampleBorder">
+        <code>
+            <i>-- Standard SQL</i><br>
+            <b>DROP</b> <i>table_name</i>;<br>
+            <br>
+            <i>-- MariaDB/MySQL allows IF EXISTS clause</i><br>
+            <b>DROP TABLE IF EXISTS</b> <i>table_name</i>;<br>
+        </code>
+    </div>
+
+    <p>If you want to drop the <em>employee</em> table, you can use this command:</p>
+
+    <!--DROP TABLE employee;-->
+    <!--DROP TABLE IF EXISTS employee;-->
+    <div class="exampleBorder">
+        <code>
+            <i>-- Standard SQL</i><br>
+            <b>DROP</b> <i>employee</i>;<br>
+            <br>
+            <i>-- MariaDB/MySQL allows IF EXISTS clause</i><br>
+            <b>DROP TABLE IF EXISTS</b> <i>employee</i>;<br>
+        </code>
+    </div>
+
+    <p>If you drop a table, remember that all data is lost along with that table's structure. There are techniques that
+        you can use to keep a backup of the data using the database engine backup utilities and you may also develop a
+        work around to ensure that the data and the table you are deleting is not harmful.</p>
+
+    <p>This is what most software developers work with in their projects. This is an incomplete information about
+        databases and it's fundamentals. I invite you to read on to the complete book in order to come out of this hole
+        and grow into a proper database administrator.</p>
 
 </body>
 

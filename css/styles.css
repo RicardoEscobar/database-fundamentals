@@ -27,6 +27,11 @@
 	src: url(../fonts/hack/Hack-Italic.ttf);
 }
 
+/* Adds indentation to every paragraph, Unless it's class is null_text_indent.*/
+p {
+	text-indent: 4em;
+}
+
 /* Key words in the text are made bold italic */
 .key
 {
@@ -140,9 +145,15 @@ span.text_style3
 	text-transform:capitalize;
 }
 
+span.emoji_large {
+	font-size: 3em;
+	margin: 0%;
+}
+
 h1
 {
 	text-align:center;
+	page-break-before: always;
 }
 
 h2
@@ -193,7 +204,7 @@ p.text_border
 	border-bottom-style: groove;
 	border-color: green;
 	border-width: 0.4em;
-	width:50%;
+	width:90%;
 	padding: 1em;
 }
 
